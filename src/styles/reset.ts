@@ -1,39 +1,32 @@
 export const reset = `
-/*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
-
-/* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property */
-*:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
-  all: unset;
-  display: revert;
-}
-
-/* Preferred box-sizing value */
-*,
-*::before,
-*::after {
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after {
   box-sizing: border-box;
 }
-
-/*
-  Remove list styles (bullets/numbers)
-  in case you use it with normalize.css
-*/
-ol,
-ul {
-  list-style: none;
+* {
+  margin: 0;
 }
-
-/* For images to not be able to exceed their container */
-img {
+html, body {
+  height: 100%;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+  display: block;
   max-width: 100%;
 }
-
-/* Removes spacing between cells in tables */
-table {
-  border-collapse: collapse;
+input, button, textarea, select {
+  font: inherit;
 }
-
-/* Revert the 'white-space' property for textarea elements on Safari */
-textarea {
-  white-space: revert;
-}`;
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+#root, #__next {
+  isolation: isolate;
+}
+`;
