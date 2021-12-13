@@ -1,34 +1,56 @@
+const path = require('path');
+
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
-    title: "slocinskidev-shop",
+    siteUrl: 'http://slocinski.dev/shop/',
+    title: 'slocinskidev-shop',
   },
   plugins: [
     {
-      resolve: "gatsby-source-wordpress",
+      resolve: 'gatsby-source-wordpress',
       options: {
-        url: "http://conurul.cluster031.hosting.ovh.net/shop/graphql",
+        url: process.env.GATSBY_SHOP_GRAPHQL,
       },
     },
-    "gatsby-plugin-postcss",
-    "gatsby-plugin-image",
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
+    `gatsby-plugin-styled-components`,
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: 'gatsby-plugin-root-import',
       options: {
-        icon: "src/images/icon.png",
+        layout: path.join(__dirname, 'src/layout'),
+        styles: path.join(__dirname, 'src/styles'),
+        assets: path.join(__dirname, 'src/assets'),
+        atoms: path.join(__dirname, 'src/atoms'),
+        molecules: path.join(__dirname, 'src/molecules'),
+        organisms: path.join(__dirname, 'src/organisms'),
+        pages: path.join(__dirname, 'src/pages'),
+        templates: path.join(__dirname, 'src/templates'),
+        types: path.join(__dirname, 'src/types'),
+        utils: path.join(__dirname, 'src/utils'),
+        src: path.join(__dirname, 'src'),
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    'gatsby-plugin-image',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: "images",
-        path: "./src/images/",
+        icon: 'src/assets/images/icon.png',
       },
-      __key: "images",
+    },
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: './src/assets/images/',
+      },
+      __key: 'images',
     },
   ],
 };
