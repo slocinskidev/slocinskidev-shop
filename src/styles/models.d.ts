@@ -10,7 +10,6 @@ declare module 'styled-components' {
       weight: Record<keyof typeof font.weight, number>;
       size: Record<keyof typeof font.size, string>;
     };
-    breakpoint: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', Function>;
     variable: Record<keyof typeof variable, string | number>;
     transition: (
       property: string,

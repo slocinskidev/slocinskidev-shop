@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import Logo from 'atoms/Logo';
+import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.nav<{ isActive: boolean }>`
   position: absolute;
@@ -19,13 +20,12 @@ export const Wrapper = styled.nav<{ isActive: boolean }>`
   transition: ${({ theme }) => theme.transition('opacity')},
     ${({ theme }) => theme.transition('visibility')};
 
-  ${({ theme }) =>
-    theme.breakpoint.md`
-      opacity: 1;
-      visibility: visible;
-      position: relative;
-      justify-content: end;
-    `}
+  @media ${breakpoint.device.md} {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    justify-content: end;
+  }
 
   ${({ isActive }) =>
     isActive &&
@@ -38,12 +38,11 @@ export const Wrapper = styled.nav<{ isActive: boolean }>`
 export const NavList = styled.ul`
   font-size: ${({ theme }) => theme.font.size.md};
 
-  ${({ theme }) =>
-    theme.breakpoint.md`
-      font-size: 1.8rem;
-      display: flex;
-      align-items: center;
-    `};
+  @media ${breakpoint.device.md} {
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+  } ;
 `;
 
 export const NavItem = styled.li`
@@ -62,8 +61,7 @@ export const NavItem = styled.li`
 export const StyledLogo = styled(Logo)`
   margin-top: 10rem;
 
-  ${({ theme }) =>
-    theme.breakpoint.md`
-      display: none;
-    `};
+  @media ${breakpoint.device.md} {
+    display: none;
+  } ;
 `;

@@ -1,5 +1,6 @@
 import ShoppingHero from 'atoms/SVG/ShoppingHero';
 import styled, { css } from 'styled-components';
+import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.section`
   max-width: ${({ theme }) => theme.variable.wrapper};
@@ -7,9 +8,9 @@ export const Wrapper = styled.section`
   margin: 6rem auto;
   gap: 2rem;
 
-  ${({ theme }) => theme.breakpoint.md`
+  @media ${breakpoint.device.md} {
     grid-template-columns: 1fr 1fr;
-  `}
+  }
 `;
 
 export const Content = styled.article`
@@ -20,9 +21,9 @@ export const Content = styled.article`
   padding: 2rem;
   order: 1;
 
-  ${({ theme }) => theme.breakpoint.md`
+  @media ${breakpoint.device.md} {
     order: 0;
-  `}
+  }
 `;
 
 export const Heading = styled.h1`
@@ -32,11 +33,9 @@ export const Heading = styled.h1`
   line-height: 82.5%;
   margin-bottom: 2rem;
 
-  ${({ theme }) =>
-    theme.breakpoint.md &&
-    css`
-      font-size: ${({ theme }) => theme.font.size.xl};
-    `}
+  @media ${breakpoint.device.md} {
+    font-size: ${({ theme }) => theme.font.size.xl};
+  }
 `;
 
 export const Description = styled.p``;

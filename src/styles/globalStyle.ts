@@ -18,10 +18,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.color.tertiary};
     min-height: fill-available;
     overflow-x: hidden;
-
-    /* ${({ theme }) => theme.breakpoint.lg`
-      background-color: red;
-    `} */
   }
 
   button, a {

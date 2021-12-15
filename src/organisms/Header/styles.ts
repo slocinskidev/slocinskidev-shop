@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Logo from 'atoms/Logo';
+import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.header`
   display: flex;
@@ -13,7 +14,7 @@ export const Wrapper = styled.header`
 export const StyledLogo = styled(Logo)`
   width: 220px;
 
-  ${({ theme }) => theme.breakpoint.md`
+  @media ${breakpoint.device.md} {
     width: 280px;
-  `}
+  }
 `;

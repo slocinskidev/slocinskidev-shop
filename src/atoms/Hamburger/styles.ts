@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import breakpoint from 'utils/breakpoints';
 
 export const Bar = styled.span`
   display: block;
@@ -8,9 +9,9 @@ export const Bar = styled.span`
   background-color: ${({ theme }) => theme.color.tertiary};
   transition: ${({ theme }) => theme.transition('background-color')};
 
-  ${({ theme }) => theme.breakpoint.md`
+  @media ${breakpoint.device.md} {
     display: none;
-  `}
+  }
 
   &::before,
   &::after {
