@@ -1,16 +1,19 @@
+import Logo, { LOGO } from 'atoms/Logo';
 import React, { FC } from 'react';
-import { Link } from 'gatsby';
 
 import { FOOTER_URL, FOOTER_TEXT } from 'utils/constants';
 
-import { Wrapper } from './styles';
+import { Wrapper, StyledLink, StyledLogo } from './styles';
 
 const Footer: FC = () => {
   return (
     <Wrapper>
-      <Link to={FOOTER_URL}>
-        <p className="footer__link">{FOOTER_TEXT}</p>
-      </Link>
+      <StyledLogo
+        link={FOOTER_URL}
+        logoAlt="brand logo"
+        variant={LOGO.VARIANT.TERTIARY}
+      />
+      <StyledLink to={FOOTER_URL}>{FOOTER_TEXT}</StyledLink>
     </Wrapper>
   );
 };

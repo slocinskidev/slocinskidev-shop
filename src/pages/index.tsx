@@ -1,7 +1,8 @@
+import HeroBanner from 'organisms/HeroBanner';
 import React from 'react';
 
 const HomePage = () => {
-  return <h1>Hello</h1>;
+  return <HeroBanner />;
 };
 
 export default HomePage;

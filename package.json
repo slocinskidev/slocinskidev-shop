@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.17",
-    "gatsby-plugin-root-import": "^2.0.8"
+    "gatsby-plugin-root-import": "^2.0.8",
+    "typescript-plugin-styled-components": "^2.0.0"
   }
 }

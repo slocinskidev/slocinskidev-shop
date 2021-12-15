@@ -1,5 +1,6 @@
 import { color } from './color';
 import { font } from './font';
+import { variable } from './variable';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -10,6 +11,11 @@ declare module 'styled-components' {
       size: Record<keyof typeof font.size, string>;
     };
     breakpoint: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', Function>;
-    maxWidth: string;
+    variable: Record<keyof typeof variable, string | number>;
+    transition: (
+      property: string,
+      duration?: string,
+      easing?: string
+    ) => FlattenSimpleInterpolation;
   }
 }

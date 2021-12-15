@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import { reset } from './reset';
-import { theme } from './mainTheme';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -12,10 +11,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    font-family: ${({ theme }) => theme.font.roboto};
     font-weight: ${({ theme }) => theme.font.weight.regular};
     font-size: ${({ theme }) => theme.font.size.xs};
     background-color: ${({ theme }) => theme.color.white};
-    font-family: ${({ theme }) => theme.font.roboto};
+    color: ${({ theme }) => theme.color.tertiary};
     min-height: fill-available;
     overflow-x: hidden;
 
@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
     `} */
   }
 
-  button {
+  button, a {
     cursor: pointer;
     font-family: ${({ theme }) => theme.font.roboto};
   }

@@ -1,11 +1,13 @@
 import { DefaultTheme } from 'styled-components';
 import { color } from './color';
 import { font } from './font';
-import { breakpoint } from './mixin';
+import { breakpoint, transition } from './mixin';
+import { variable } from './variable';
 
 export const theme: DefaultTheme = {
   color,
   font,
   breakpoint,
-  maxWidth: '1400px',
+  variable,
+  transition,
 };
