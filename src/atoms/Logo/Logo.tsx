@@ -1,43 +1,45 @@
 import React, { FC } from 'react';
-import { Link } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
-
-import styled from 'styled-components';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import { LogoProps, LOGO } from './model.d';
 
-const Logo: FC<LogoProps> = ({
-  variant,
-  link,
-  logoAlt,
-  linkAlt,
-  className,
-}) => {
+const Logo: FC<LogoProps> = ({ variant, link, linkAlt, className }) => {
   const getLogo = (logoVariant?: LOGO.VARIANT) => {
+    const {
+      wpLayout: {
+        logo: { primaryLogo, secondaryLogo },
+      },
+    } = useStaticQuery(graphql`
+      {
+        wpLayout {
+          logo {
+            primaryLogo {
+              ...ImageFragment
+            }
+            secondaryLogo {
+              ...ImageFragment
+            }
+          }
+        }
+      }
+    `);
+
+    const primaryImage = getImage(primaryLogo.localFile);
+
     const variantsMap = {
       [LOGO.VARIANT.PRIMARY]: (
-        <StaticImage
-          src="../../assets/images/logo/logo-svg.svg"
-          alt={logoAlt}
-          placeholder="blurred"
+        <GatsbyImage
+          image={primaryImage!}
+          alt={primaryLogo.altText}
           className={className}
         />
       ),
       [LOGO.VARIANT.SECONDARY]: (
-        <StaticImage
-          src="../../assets/images/logo/logo-svg-light.svg"
-          alt={logoAlt}
-          placeholder="blurred"
-          className={className}
-        />
-      ),
-      [LOGO.VARIANT.TERTIARY]: (
-        <StaticImage
-          src="../../assets/images/logo/logo.png"
-          alt={logoAlt}
-          placeholder="blurred"
-          width={40}
-          height={40}
+        <GatsbyImage
+          image={secondaryLogo.localFile.childImageSharp.gatsbyImageData}
+          alt={secondaryLogo.altText}
           className={className}
         />
       ),

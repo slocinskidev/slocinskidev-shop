@@ -8,11 +8,7 @@ import { Wrapper, StyledLink, StyledLogo } from './styles';
 const Footer: FC = () => {
   return (
     <Wrapper>
-      <StyledLogo
-        link={FOOTER_URL}
-        logoAlt="brand logo"
-        variant={LOGO.VARIANT.TERTIARY}
-      />
+      <StyledLogo link={FOOTER_URL} variant={LOGO.VARIANT.SECONDARY} />
       <StyledLink to={FOOTER_URL}>{FOOTER_TEXT}</StyledLink>
     </Wrapper>
   );

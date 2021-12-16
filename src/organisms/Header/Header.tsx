@@ -8,18 +8,18 @@ import { ROOT_PATH } from 'utils/constants';
 
 import { Wrapper, StyledLogo } from './styles';
 
-const Header = () => {
+const Header = ({
+  navigation,
+}: {
+  navigation: CommonTypes.NavigationType[];
+}) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   return (
     <Wrapper>
-      <StyledLogo
-        variant={LOGO.VARIANT.SECONDARY}
-        logoAlt="logo"
-        link={ROOT_PATH}
-      />
+      <StyledLogo variant={LOGO.VARIANT.PRIMARY} link={ROOT_PATH} />
       <Hamburger isActive={isActive} setIsActive={setIsActive} />
-      <Navigation isActive={isActive} />
+      <Navigation isActive={isActive} navigation={navigation} />
     </Wrapper>
   );
 };
