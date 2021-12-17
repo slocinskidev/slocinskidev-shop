@@ -1,44 +1,90 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import ShoppingHero from 'atoms/SVG/ShoppingHero';
+import { BUTTON } from 'atoms/Button';
+import { STRING } from 'utils/constants';
 
 import {
   Wrapper,
   Content,
   Heading,
   Description,
-  StyledShoppingHero,
+  StyledImage,
+  StyledButton,
 } from './styles';
 
 const HeroBanner = () => {
-  const data = useStaticQuery(graphql`
+  const {
+    wpComponent: { heroBanner },
+  } = useStaticQuery(graphql`
     {
-      wpLayout(slug: { eq: "images" }) {
-        images {
-          hero {
-            altText
-            sourceUrl
+      wpComponent(slug: { eq: "hero-banner" }) {
+        heroBanner {
+          heading
+          description
+          image {
+            ...ImageFragment
+          }
+          button {
+            ... on WpPage {
+              title
+              uri
+            }
           }
         }
       }
     }
   `);
 
+  if (!heroBanner) return null;
+
+  const { heading, description, image, button } = heroBanner;
+
+  const renderHeading = heading ? <Heading>{heading}</Heading> : null;
+
+  const renderDescription = description ? (
+    <Description>{description}</Description>
+  ) : null;
+
+  const renderImage = () => {
+    if (!image) return null;
+
+    const { extension: imageExtension, publicURL } = image.localFile;
+
+    const isGatsbyImage =
+      imageExtension !== STRING.SVG_EXTENSION &&
+      image.localFile.childImageSharp;
+
+    const gatsbyImage = isGatsbyImage ? getImage(image.localFile) : null;
+
+    return isGatsbyImage ? (
+      <StyledImage as={GatsbyImage} image={gatsbyImage!} alt={image?.altText} />
+    ) : (
+      <StyledImage as="img" src={publicURL} alt={image?.altText} />
+    );
+  };
+
+  const renderButton = () => {
+    if (!button) return null;
+
+    const { title, uri: link } = button;
+
+    return (
+      <StyledButton variant={BUTTON.VARIANT.CONTAINED} link={link}>
+        {title}
+      </StyledButton>
+    );
+  };
+
   return (
     <Wrapper>
       <Content>
-        <Heading>Hipster ipsum</Heading>
-        <Description>
-          I`m baby actually pork belly sartorial, organic hell of migas ethical
-          palo santo. Paleo tumeric 3 wolf moon tattooed heirloom. Etsy health
-          goth occupy put a bird on it activated charcoal portland taiyaki tilde
-          meditation deep v taxidermy pinterest. Schlitz forage farm-to-table
-          polaroid.
-        </Description>
+        {renderHeading}
+        {renderDescription}
+        {renderButton()}
       </Content>
-      <img src={data.wpLayout.images.hero.sourceUrl} />
-      {/* <StyledShoppingHero /> */}
+      {renderImage()}
     </Wrapper>
   );
 };

@@ -8,6 +8,6 @@ export const transition = (
   return css`
     ${property}
     ${duration}
-    ${easing};
+    ${easing}
   `;
 };

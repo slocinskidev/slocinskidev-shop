@@ -13,3 +13,8 @@ export const NAVIGATION = [
     alt: 'redirects to projects page',
   },
 ];
+
+export const STRING = {
+  SVG_EXTENSION: 'svg',
+  GIF_EXTENSION: 'gif',
+};

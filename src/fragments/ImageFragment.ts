@@ -2,7 +2,10 @@ import { graphql } from 'gatsby';
 
 export const query = graphql`
   fragment ImageFragment on WpMediaItem {
+    altText
     localFile {
+      extension
+      publicURL
       childImageSharp {
         gatsbyImageData(
           formats: PNG
@@ -11,6 +14,5 @@ export const query = graphql`
         )
       }
     }
-    altText
   }
 `;

@@ -1,3 +1,4 @@
+import Button from 'atoms/Button';
 import ShoppingHero from 'atoms/SVG/ShoppingHero';
 import styled, { css } from 'styled-components';
 import breakpoint from 'utils/breakpoints';
@@ -38,12 +39,18 @@ export const Heading = styled.h1`
   }
 `;
 
-export const Description = styled.p``;
+export const Description = styled.p`
+  line-height: 1.5;
+`;
 
-export const StyledShoppingHero = styled(ShoppingHero)`
+export const StyledImage = styled.div`
   width: 100%;
   height: 100%;
   max-width: 700px;
   margin: 0 auto;
   padding: 2rem;
+`;
+
+export const StyledButton = styled(Button)`
+  margin-top: 4rem;
 `;

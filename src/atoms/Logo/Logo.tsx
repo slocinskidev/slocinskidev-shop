@@ -31,23 +31,23 @@ const Logo: FC<LogoProps> = ({ variant, link, linkAlt, className }) => {
       }
     `);
 
-    console.log(primaryLogo);
+    if (!primaryLogo || !secondaryLogo) return null;
 
-    const primaryImage = getImage(primaryLogo?.localFile);
-    const secondaryImage = getImage(secondaryLogo?.localFile);
+    const primaryImage = getImage(primaryLogo.localFile);
+    const secondaryImage = getImage(secondaryLogo.localFile);
 
     const variantsMap = {
       [LOGO.VARIANT.PRIMARY]: (
         <GatsbyImage
           image={primaryImage!}
-          alt={primaryLogo?.altText}
+          alt={primaryLogo.altText}
           className={className}
         />
       ),
       [LOGO.VARIANT.SECONDARY]: (
         <GatsbyImage
           image={secondaryImage!}
-          alt={secondaryLogo?.altText}
+          alt={secondaryLogo.altText}
           className={className}
         />
       ),
