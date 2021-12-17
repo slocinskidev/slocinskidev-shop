@@ -50,11 +50,14 @@ const HeroBanner = () => {
   const renderImage = () => {
     if (!image) return null;
 
-    const { extension: imageExtension, publicURL } = image.localFile;
+    const {
+      extension: imageExtension,
+      publicURL,
+      childImageSharp,
+    } = image.localFile;
 
     const isGatsbyImage =
-      imageExtension !== STRING.SVG_EXTENSION &&
-      image.localFile.childImageSharp;
+      imageExtension !== STRING.SVG_EXTENSION && childImageSharp;
 
     const gatsbyImage = isGatsbyImage ? getImage(image.localFile) : null;
 
