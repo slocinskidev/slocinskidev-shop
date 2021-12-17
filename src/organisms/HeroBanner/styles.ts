@@ -1,6 +1,5 @@
 import Button from 'atoms/Button';
-import ShoppingHero from 'atoms/SVG/ShoppingHero';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.section`

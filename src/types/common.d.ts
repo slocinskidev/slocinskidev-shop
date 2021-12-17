@@ -7,7 +7,8 @@ declare namespace CommonTypes {
   interface FooterType {
     description: string;
     url: {
-      uri: string;
+      name?: string;
+      url: string;
     };
   }
 }

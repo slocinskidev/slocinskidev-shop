@@ -9,13 +9,13 @@ import { Wrapper, StyledLink, StyledLogo } from './styles';
 const Footer = ({
   footer: {
     description,
-    url: { uri: link },
+    url: { url },
   },
 }: FooterProps) => {
   return (
     <Wrapper>
-      <StyledLogo link={link} variant={LOGO.VARIANT.SECONDARY} />
-      <StyledLink to={link}>{description}</StyledLink>
+      <StyledLogo link={url} variant={LOGO.VARIANT.SECONDARY} />
+      <StyledLink to={url}>{description}</StyledLink>
     </Wrapper>
   );
 };

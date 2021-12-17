@@ -31,9 +31,8 @@ const Layout: FC = ({ children }) => {
         footer {
           description
           url {
-            ... on WpPage {
-              uri
-            }
+            url
+            title
           }
         }
       }

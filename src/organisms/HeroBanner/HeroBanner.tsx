@@ -16,10 +16,10 @@ import {
 
 const HeroBanner = () => {
   const {
-    wpComponent: { heroBanner },
+    wpPage: { heroBanner },
   } = useStaticQuery(graphql`
     {
-      wpComponent(slug: { eq: "hero-banner" }) {
+      wpPage(slug: { eq: "homepage" }) {
         heroBanner {
           heading
           description

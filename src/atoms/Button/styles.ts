@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { BUTTON } from 'atoms/Button';
 import RightArrow from 'atoms/SVG/RightArrow';
+import { propTypes } from 'gatsby-plugin-image/dist/src/components/static-image.server';
 
 export const StyledRightArrow = styled(RightArrow)`
   width: 25px;
@@ -9,7 +10,6 @@ export const StyledRightArrow = styled(RightArrow)`
 
 export const Wrapper = styled.button<{
   variant: BUTTON.VARIANT;
-  isIcon?: boolean;
 }>`
   position: relative;
   display: inline-flex;

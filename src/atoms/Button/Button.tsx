@@ -27,23 +27,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     const renderButton = link ? (
-      <Wrapper
-        as={Link}
-        className={className}
-        to={link}
-        variant={variant}
-        isIcon={isIcon}
-      >
+      <Wrapper as={Link} className={className} to={link} variant={variant}>
         {buttonContent}
       </Wrapper>
     ) : (
-      <Wrapper
-        className={className}
-        {...props}
-        ref={ref}
-        variant={variant}
-        isIcon={isIcon}
-      >
+      <Wrapper className={className} {...props} ref={ref} variant={variant}>
         {buttonContent}
       </Wrapper>
     );
