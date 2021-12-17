@@ -1,7 +1,8 @@
 import React from 'react';
 
-const RightArrow = () => (
+const RightArrow = ({ className }: { className?: string }) => (
   <svg
+    className={className}
     width="38"
     height="24"
     viewBox="0 0 38 24"

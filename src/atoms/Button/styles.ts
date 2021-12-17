@@ -1,5 +1,11 @@
 import styled, { css } from 'styled-components';
 import { BUTTON } from 'atoms/Button';
+import RightArrow from 'atoms/SVG/RightArrow';
+
+export const StyledRightArrow = styled(RightArrow)`
+  width: 25px;
+  color: ${({ theme }) => theme.color.tertiary};
+`;
 
 export const Wrapper = styled.button<{
   variant: BUTTON.VARIANT;
@@ -24,6 +30,15 @@ export const Wrapper = styled.button<{
 
       &:hover {
         color: ${({ theme }) => theme.color.secondary};
+
+        ${StyledRightArrow} {
+          color: ${({ theme }) => theme.color.secondary};
+        }
+      }
+
+      ${StyledRightArrow} {
+        margin-left: 1rem;
+        transition: ${({ theme }) => theme.transition('color')};
       }
     `}
 
@@ -42,6 +57,11 @@ export const Wrapper = styled.button<{
         background-color: ${({ theme }) => theme.color.secondary};
         border-color: ${({ theme }) => theme.color.secondary};
       }
+
+      ${StyledRightArrow} {
+        margin-left: 1rem;
+        color: ${({ theme }) => theme.color.white};
+      }
     `}
 
   ${({ variant }) =>
@@ -49,10 +69,10 @@ export const Wrapper = styled.button<{
     css`
       border-radius: ${({ theme }) => theme.variable.borderRadiusRound};
       border-color: ${({ theme }) => theme.color.gray6};
-      transition: ${({ theme }) => theme.transition('transform')};
+      transition: ${({ theme }) => theme.transition('border-color')};
 
       &:hover {
-        transform: scale(1.1);
+        border-color: ${({ theme }) => theme.color.secondary};
       }
     `}
 `;
@@ -61,5 +81,3 @@ export const Content = styled.span`
   display: flex;
   align-items: center;
 `;
-
-export const Label = styled.span``;

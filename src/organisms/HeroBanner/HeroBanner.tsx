@@ -71,7 +71,7 @@ const HeroBanner = () => {
     const { title, uri: link } = button;
 
     return (
-      <StyledButton variant={BUTTON.VARIANT.CONTAINED} link={link}>
+      <StyledButton isIcon variant={BUTTON.VARIANT.CONTAINED} link={link}>
         {title}
       </StyledButton>
     );

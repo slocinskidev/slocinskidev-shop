@@ -1,11 +1,9 @@
 import React, { forwardRef } from 'react';
 import { Link } from 'gatsby';
 
-import RightArrow from 'atoms/SVG/RightArrow';
-
 import { BUTTON, ButtonProps } from './model.d';
 
-import { Content, Label, Wrapper } from './styles';
+import { Content, Wrapper, StyledRightArrow } from './styles';
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -19,11 +17,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const showIcon = isIcon ? <RightArrow /> : null;
+    const showIcon = isIcon ? <StyledRightArrow /> : null;
 
     const buttonContent = (
       <Content>
-        <Label>{children}</Label>
+        <span>{children}</span>
         {showIcon}
       </Content>
     );
