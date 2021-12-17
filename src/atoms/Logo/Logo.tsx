@@ -13,10 +13,15 @@ const Logo: FC<LogoProps> = ({ variant, link, linkAlt, className }) => {
       },
     } = useStaticQuery(graphql`
       {
-        wpLayout {
+        wpLayout(slug: { eq: "logos" }) {
           logo {
             primaryLogo {
-              ...ImageFragment
+              localFile {
+                childImageSharp {
+                  gatsbyImageData
+                }
+              }
+              altText
             }
             secondaryLogo {
               ...ImageFragment
@@ -26,20 +31,23 @@ const Logo: FC<LogoProps> = ({ variant, link, linkAlt, className }) => {
       }
     `);
 
-    const primaryImage = getImage(primaryLogo.localFile);
+    console.log(primaryLogo);
+
+    const primaryImage = getImage(primaryLogo?.localFile);
+    const secondaryImage = getImage(secondaryLogo?.localFile);
 
     const variantsMap = {
       [LOGO.VARIANT.PRIMARY]: (
         <GatsbyImage
           image={primaryImage!}
-          alt={primaryLogo.altText}
+          alt={primaryLogo?.altText}
           className={className}
         />
       ),
       [LOGO.VARIANT.SECONDARY]: (
         <GatsbyImage
-          image={secondaryLogo.localFile.childImageSharp.gatsbyImageData}
-          alt={secondaryLogo.altText}
+          image={secondaryImage!}
+          alt={secondaryLogo?.altText}
           className={className}
         />
       ),

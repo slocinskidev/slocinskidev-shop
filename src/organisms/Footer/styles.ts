@@ -23,4 +23,5 @@ export const StyledLink = styled(Link)`
 export const StyledLogo = styled(Logo)`
   width: 40px;
   height: 40px;
+  margin-bottom: 1rem;
 `;

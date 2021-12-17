@@ -1,15 +1,21 @@
-import Logo, { LOGO } from 'atoms/Logo';
-import React, { FC } from 'react';
+import React from 'react';
 
-import { FOOTER_URL, FOOTER_TEXT } from 'utils/constants';
+import Logo, { LOGO } from 'atoms/Logo';
+
+import { FooterProps } from './model';
 
 import { Wrapper, StyledLink, StyledLogo } from './styles';
 
-const Footer: FC = () => {
+const Footer = ({
+  footer: {
+    description,
+    url: { uri: link },
+  },
+}: FooterProps) => {
   return (
     <Wrapper>
-      <StyledLogo link={FOOTER_URL} variant={LOGO.VARIANT.SECONDARY} />
-      <StyledLink to={FOOTER_URL}>{FOOTER_TEXT}</StyledLink>
+      <StyledLogo link={link} variant={LOGO.VARIANT.SECONDARY} />
+      <StyledLink to={link}>{description}</StyledLink>
     </Wrapper>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import ShoppingHero from 'atoms/SVG/ShoppingHero';
 
@@ -11,6 +12,19 @@ import {
 } from './styles';
 
 const HeroBanner = () => {
+  const data = useStaticQuery(graphql`
+    {
+      wpLayout(slug: { eq: "images" }) {
+        images {
+          hero {
+            altText
+            sourceUrl
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <Wrapper>
       <Content>
@@ -23,7 +37,8 @@ const HeroBanner = () => {
           polaroid.
         </Description>
       </Content>
-      <StyledShoppingHero />
+      <img src={data.wpLayout.images.hero.sourceUrl} />
+      {/* <StyledShoppingHero /> */}
     </Wrapper>
   );
 };

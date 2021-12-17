@@ -7,21 +7,33 @@ import Footer from 'organisms/Footer';
 import GlobalStyle from 'styles/globalStyle';
 import { theme } from 'styles/mainTheme';
 
+import { LayoutQueryType } from './model';
+
 import { Wrapper } from './styles';
-import { WpMenuType } from './model';
 
 const Layout: FC = ({ children }) => {
   const {
     wpMenu: {
       menuItems: { nodes: navigation },
     },
-  } = useStaticQuery<WpMenuType>(graphql`
+    wpLayout: { footer },
+  } = useStaticQuery<LayoutQueryType>(graphql`
     {
       wpMenu {
         menuItems {
           nodes {
             label
             path
+          }
+        }
+      }
+      wpLayout(slug: { eq: "footer" }) {
+        footer {
+          description
+          url {
+            ... on WpPage {
+              uri
+            }
           }
         }
       }
@@ -33,7 +45,7 @@ const Layout: FC = ({ children }) => {
       <GlobalStyle />
       <Header navigation={navigation} />
       <Wrapper>{children}</Wrapper>
-      <Footer />
+      <Footer footer={footer} />
     </ThemeProvider>
   );
 };

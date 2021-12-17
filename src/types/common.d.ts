@@ -3,4 +3,11 @@ declare namespace CommonTypes {
     label: string;
     path: string;
   }
+
+  interface FooterType {
+    description: string;
+    url: {
+      uri: string;
+    };
+  }
 }

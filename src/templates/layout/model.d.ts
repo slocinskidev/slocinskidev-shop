@@ -1,7 +1,10 @@
-export interface WpMenuType {
+export interface LayoutQueryType {
   wpMenu: {
     menuItems: {
       nodes: CommonTypes.NavigationType[];
     };
+  };
+  wpLayout: {
+    footer: CommonTypes.FooterType;
   };
 }
