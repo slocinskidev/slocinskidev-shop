@@ -23,16 +23,19 @@ export const ProductFragment = graphql`
       id
       name
       price
+      regularPrice
     }
     ... on WpVariableProduct {
       id
       name
       price
+      regularPrice
     }
     ... on WpExternalProduct {
       id
       name
       price
+      regularPrice
       externalUrl
     }
     ... on WpGroupProduct {
@@ -44,6 +47,7 @@ export const ProductFragment = graphql`
             id
             name
             price
+            regularPrice
           }
         }
       }

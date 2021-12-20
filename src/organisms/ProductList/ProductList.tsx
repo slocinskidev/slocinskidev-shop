@@ -1,16 +1,34 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { getImage } from 'gatsby-plugin-image';
 
-import { List, ProductName, ShortDescription } from './styles';
+import {
+  List,
+  ProductName,
+  Price,
+  StyledGatsbyImage,
+  PriceSection,
+  RegularPrice,
+} from './styles';
 
 const ProductList = ({ products }: { products: CommonTypes.ProductType[] }) => {
+  if (!products) return null;
+
   const renderProducts = products?.map(
-    ({ id, image, name, shortDescription, link }) => {
+    ({ id, image, name, price, regularPrice, link }) => {
       const gatsbyImage = getImage(image.localFile);
 
       const renderImage = gatsbyImage ? (
-        <GatsbyImage image={gatsbyImage} alt={image.altText} />
+        <StyledGatsbyImage image={gatsbyImage} alt={image.altText} />
+      ) : null;
+
+      const renderPrice = price ? (
+        <PriceSection>
+          <Price dangerouslySetInnerHTML={{ __html: price }} />
+          {regularPrice && (
+            <RegularPrice dangerouslySetInnerHTML={{ __html: regularPrice }} />
+          )}
+        </PriceSection>
       ) : null;
 
       return (
@@ -19,9 +37,7 @@ const ProductList = ({ products }: { products: CommonTypes.ProductType[] }) => {
             {renderImage}
             <ProductName>{name}</ProductName>
           </Link>
-          <ShortDescription
-            dangerouslySetInnerHTML={{ __html: shortDescription }}
-          />
+          {renderPrice}
         </li>
       );
     }

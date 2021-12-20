@@ -1,19 +1,9 @@
-import { GatsbyImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
-import breakpoint from 'utils/breakpoints';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import Button from 'atoms/Button';
 
-export const List = styled.ul`
-  display: grid;
-
-  @media ${breakpoint.device.md} {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-  }
-
-  @media ${breakpoint.device.lg} {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-  }
+export const Wrapper = styled.section`
+  padding: ${({ theme }) => theme.variable.paddingWrapper};
 `;
 
 export const ProductName = styled.h3`
@@ -21,10 +11,16 @@ export const ProductName = styled.h3`
   margin: 2rem 0 1rem;
 `;
 
+export const Description = styled.section`
+  font-size: ${({ theme }) => theme.font.size.sm};
+  margin-bottom: 4rem;
+`;
+
 export const PriceSection = styled.section`
   display: flex;
   align-items: center;
   font-size: ${({ theme }) => theme.font.size.xs};
+  margin-bottom: 2rem;
 `;
 
 export const Price = styled.section`
@@ -39,4 +35,14 @@ export const RegularPrice = styled.section`
 
 export const StyledGatsbyImage = styled(GatsbyImage)`
   height: 400px;
+`;
+
+export const CategoriesList = styled.ul`
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+`;
+
+export const StyledButton = styled(Button)`
+  padding: 0.5rem 1rem;
 `;

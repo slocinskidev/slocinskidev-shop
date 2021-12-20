@@ -16,9 +16,15 @@ declare namespace CommonTypes {
 
   type ProductType = {
     id: string;
+    link: string;
+    description: string;
     image: ImageType;
     name: string;
-    shortDescription: string;
-    link: string;
+    productCategories: {
+      nodes: { id: string; name: string }[];
+    };
+    price: string;
+    regularPrice?: string;
+    galleryImages?: { nodes: ImageType[] };
   };
 }

@@ -17,4 +17,5 @@ export const NAVIGATION = [
 export const STRING = {
   SVG_EXTENSION: 'svg',
   GIF_EXTENSION: 'gif',
+  CATEGORY: 'category',
 };
