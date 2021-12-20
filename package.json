@@ -8,11 +8,13 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
+    "build": "GATSBY_CONCURRENT_DOWNLOAD=7 gatsby build",
+    "develop": "GATSBY_CONCURRENT_DOWNLOAD=7 gatsby develop",
+    "develop:lan": "gatsby -H 192.168.1.88 -p 8000 develop",
+    "start": "npm run develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "tslint": "tsc --noEmit"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.2",

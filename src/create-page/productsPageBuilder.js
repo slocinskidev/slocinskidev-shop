@@ -1,31 +1,31 @@
-const path = require('path');
+import { resolve } from 'path';
 
-const component = path.resolve('src/templates/ProductsPage/ProductsPage.tsx');
+const component = resolve('src/templates/ProductsPage/ProductsPage.tsx');
 
-module.exports = async ({ createPage, graphql }) => {
-  const {
-    data: {
-      wpPage: { id, title, uri, content },
-    },
-  } = await graphql(`
+export default async ({ createPage, graphql }) => {
+  const results = await graphql(`
     {
-      wpPage(slug: { eq: "products" }) {
-        id
+      productsPage: wpPage(slug: { eq: "products" }) {
         title
-        content
         uri
       }
     }
   `);
 
+  if (results.errors) return;
+
+  const {
+    data: {
+      productsPage: { title, uri },
+    },
+  } = results;
+
   createPage({
     path: uri,
     component,
     context: {
-      id,
       title,
       uri,
-      content,
     },
   });
 };

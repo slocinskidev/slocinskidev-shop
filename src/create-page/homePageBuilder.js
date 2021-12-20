@@ -1,15 +1,11 @@
-const path = require('path');
+import { resolve } from 'path';
 
-const component = path.resolve('src/templates/HomePage/HomePage.tsx');
+const component = resolve('src/templates/HomePage/HomePage.tsx');
 
-module.exports = async ({ createPage, graphql }) => {
-  const {
-    data: {
-      wpPage: { title },
-    },
-  } = await graphql(`
+export default async ({ createPage, graphql }) => {
+  const results = await graphql(`
     {
-      wpPage(slug: { eq: "homepage" }) {
+      homePage: wpPage(slug: { eq: "homepage" }) {
         id
         title
         content
@@ -19,6 +15,14 @@ module.exports = async ({ createPage, graphql }) => {
       }
     }
   `);
+
+  if (results.errors) return;
+
+  const {
+    data: {
+      homePage: { title },
+    },
+  } = results;
 
   createPage({
     path: '/',

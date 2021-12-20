@@ -1,15 +1,40 @@
 import React, { FC } from 'react';
 import { graphql } from 'gatsby';
 
-import HeroBanner from 'organisms/HeroBanner';
+import ProductList from 'organisms/ProductList';
 
-const ProductsPage = ({ pageContext }: any) => {
+import { ProductsPageNodesType } from './model';
+
+import { Wrapper, StyledPageTitle } from './styles';
+
+const ProductsPage = ({
+  data: {
+    productsPage: { title },
+    allWpProduct: { nodes: products },
+  },
+}: {
+  data: ProductsPageNodesType;
+}) => {
   return (
-    <>
-      <HeroBanner />
-      {pageContext.title}
-    </>
+    <Wrapper>
+      <StyledPageTitle>{title}</StyledPageTitle>
+      <ProductList products={products} />
+    </Wrapper>
   );
 };
+
+export const query = graphql`
+  query ProductsPageQuery {
+    productsPage: wpPage(slug: { eq: "products" }) {
+      title
+      content
+    }
+    allWpProduct {
+      nodes {
+        ...ProductFragment
+      }
+    }
+  }
+`;
 
 export default ProductsPage;

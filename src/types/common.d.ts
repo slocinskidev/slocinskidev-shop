@@ -1,4 +1,6 @@
 declare namespace CommonTypes {
+  type ImageType = import('./gatsby-image').ImageType;
+
   interface NavigationType {
     label: string;
     path: string;
@@ -11,4 +13,12 @@ declare namespace CommonTypes {
       url: string;
     };
   }
+
+  type ProductType = {
+    id: string;
+    image: ImageType;
+    name: string;
+    shortDescription: string;
+    link: string;
+  };
 }
