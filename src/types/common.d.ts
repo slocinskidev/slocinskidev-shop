@@ -28,4 +28,14 @@ declare namespace CommonTypes {
     galleryImages: { nodes: ImageType[] };
     regularPrice?: string;
   };
+
+  type CartInfoType = {
+    image: CommonTypes.ImageType;
+    noProductText: string;
+    noProductDescription: string;
+    button: {
+      title: string;
+      uri: string;
+    };
+  };
 }

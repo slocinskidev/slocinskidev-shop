@@ -13,18 +13,14 @@ import { Wrapper } from './Layout.styles';
 
 const Layout: FC = ({ children }) => {
   const {
-    wpMenu: {
-      menuItems: { nodes: navigation },
-    },
+    allWpMenuItem: { nodes: navigation },
     wpLayout: { footer },
   } = useStaticQuery<LayoutQueryType>(graphql`
     {
-      wpMenu {
-        menuItems {
-          nodes {
-            label
-            path
-          }
+      allWpMenuItem(filter: { locations: { eq: PRIMARY } }) {
+        nodes {
+          label
+          path
         }
       }
       wpLayout(slug: { eq: "footer" }) {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
 
 import { LOGO } from 'atoms/Logo';
@@ -8,7 +8,7 @@ import { NavigationProps } from './model';
 
 import { Wrapper, StyledLogo, NavList, NavItem } from './Navigation.styles';
 
-const Navigation: FC<NavigationProps> = ({ isActive, navigation }) => {
+const Navigation = ({ isActive, navigation }: NavigationProps) => {
   const renderNavigationItems = navigation?.map(({ label, path }) => (
     <NavItem key={label}>
       <Link to={path} activeClassName="active">
@@ -19,7 +19,6 @@ const Navigation: FC<NavigationProps> = ({ isActive, navigation }) => {
 
   return (
     <Wrapper isActive={isActive}>
-      <StyledLogo variant={LOGO.VARIANT.PRIMARY} link={ROOT_PATH} />
       <NavList>{renderNavigationItems}</NavList>
     </Wrapper>
   );

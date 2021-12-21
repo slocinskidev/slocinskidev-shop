@@ -1,6 +1,7 @@
 import homePageBuilder from '../src/create-page/homePageBuilder';
 import productsPageBuilder from '../src/create-page/productsPageBuilder';
 import productDetailsPageBuilder from '../src/create-page/productDetailsPageBuilder';
+import cartPageBuilder from '../src/create-page/cartPageBuilder';
 
 export const createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -9,6 +10,7 @@ export const createPages = async ({ actions, graphql }) => {
     homePageBuilder,
     productsPageBuilder,
     productDetailsPageBuilder,
+    cartPageBuilder,
   ].map((builder) =>
     builder({
       createPage,
