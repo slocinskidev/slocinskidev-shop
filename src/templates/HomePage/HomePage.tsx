@@ -3,11 +3,16 @@ import { graphql } from 'gatsby';
 
 import HeroBanner from 'organisms/HeroBanner';
 import ProductList from 'organisms/ProductList';
+import { BUTTON } from 'atoms/Button';
 
 import { HomePageNodesType } from './model';
 
-import { StyledButton, StyledPageTitle, Wrapper } from './HomePage.styles';
-import { BUTTON } from 'atoms/Button';
+import {
+  StyledButton,
+  StyledPageTitle,
+  StyledRightArrow,
+  Wrapper,
+} from './HomePage.styles';
 
 const HomePage = ({
   data: {
@@ -21,7 +26,7 @@ const HomePage = ({
       <HeroBanner />
       <StyledPageTitle>Ostatnio dodane produkty</StyledPageTitle>
       <ProductList products={products} />
-      <StyledButton variant={BUTTON.VARIANT.LINK} isIcon>
+      <StyledButton variant={BUTTON.VARIANT.LINK} icon={<StyledRightArrow />}>
         więcej produktów
       </StyledButton>
     </Wrapper>

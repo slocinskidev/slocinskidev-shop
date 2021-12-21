@@ -12,6 +12,7 @@ import {
   Description,
   StyledImage,
   StyledButton,
+  StyledRightArrow,
 } from './HeroBanner.styles';
 
 const HeroBanner = () => {
@@ -74,7 +75,11 @@ const HeroBanner = () => {
     const { title, uri: link } = button;
 
     return (
-      <StyledButton isIcon variant={BUTTON.VARIANT.CONTAINED} link={link}>
+      <StyledButton
+        icon={<StyledRightArrow />}
+        variant={BUTTON.VARIANT.CONTAINED}
+        link={link}
+      >
         {title}
       </StyledButton>
     );

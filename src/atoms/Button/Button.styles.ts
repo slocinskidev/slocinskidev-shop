@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components';
 import { BUTTON } from 'atoms/Button';
-import RightArrow from 'atoms/SVG/RightArrow';
 
-export const StyledRightArrow = styled(RightArrow)`
-  width: 25px;
-  color: ${({ theme }) => theme.color.tertiary};
+export const Content = styled.span`
+  display: flex;
+  align-items: center;
 `;
 
 export const Wrapper = styled.button<{
@@ -29,15 +28,6 @@ export const Wrapper = styled.button<{
 
       &:hover {
         color: ${({ theme }) => theme.color.secondary};
-
-        ${StyledRightArrow} {
-          color: ${({ theme }) => theme.color.secondary};
-        }
-      }
-
-      ${StyledRightArrow} {
-        margin-left: 1rem;
-        transition: ${({ theme }) => theme.transition('color')};
       }
     `}
 
@@ -56,11 +46,6 @@ export const Wrapper = styled.button<{
         background-color: ${({ theme }) => theme.color.secondary};
         border-color: ${({ theme }) => theme.color.secondary};
       }
-
-      ${StyledRightArrow} {
-        margin-left: 1rem;
-        color: ${({ theme }) => theme.color.white};
-      }
     `}
 
   ${({ variant }) =>
@@ -74,9 +59,25 @@ export const Wrapper = styled.button<{
         border-color: ${({ theme }) => theme.color.secondary};
       }
     `}
-`;
 
-export const Content = styled.span`
-  display: flex;
-  align-items: center;
+    ${({ variant }) =>
+    variant === BUTTON.VARIANT.ACCORDION &&
+    css`
+      text-transform: uppercase;
+      font-weight: ${({ theme }) => theme.font.weight.medium};
+      font-size: ${({ theme }) => theme.font.size.sm};
+      padding-left: 0;
+      padding-right: 0;
+      transition: ${({ theme }) => theme.transition('color')};
+      display: grid;
+      width: 100%;
+
+      ${Content} {
+        justify-content: space-between;
+      }
+
+      &:hover {
+        color: ${({ theme }) => theme.color.secondary};
+      }
+    `}
 `;

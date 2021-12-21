@@ -2,20 +2,22 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import Button, { BUTTON } from 'atoms/Button';
+import ProductGallery from 'molecules/ProductGallery';
 import { STRING } from 'utils/constants';
 
 import {
   ProductName,
   CategoriesList,
-  Description,
+  ShortDescription,
   Price,
   PriceSection,
   RegularPrice,
   StyledButton,
   Wrapper,
   DetailsWrapper,
+  StyledAccordion,
+  StyledRightArrow,
 } from './ProductDetailsPage.styles';
-import ProductGallery from 'molecules/ProductGallery';
 
 const ProductDetailsPage = ({
   data: { product },
@@ -26,6 +28,7 @@ const ProductDetailsPage = ({
 
   const {
     name,
+    shortDescription,
     description,
     image,
     galleryImages,
@@ -36,10 +39,10 @@ const ProductDetailsPage = ({
 
   const renderPrice = price ? (
     <PriceSection>
-      <Price dangerouslySetInnerHTML={{ __html: price }} />
       {regularPrice && (
         <RegularPrice dangerouslySetInnerHTML={{ __html: regularPrice }} />
       )}
+      <Price dangerouslySetInnerHTML={{ __html: price }} />
     </PriceSection>
   ) : null;
 
@@ -59,8 +62,8 @@ const ProductDetailsPage = ({
   ) : null;
 
   const renderButton = (
-    <Button variant={BUTTON.VARIANT.CONTAINED} isIcon>
-      Add to cart
+    <Button variant={BUTTON.VARIANT.CONTAINED} icon={<StyledRightArrow />}>
+      Dodaj do koszyka
     </Button>
   );
 
@@ -70,9 +73,16 @@ const ProductDetailsPage = ({
       <DetailsWrapper>
         <ProductName>{name}</ProductName>
         {renderCategories}
-        <Description dangerouslySetInnerHTML={{ __html: description }} />
+        <ShortDescription
+          dangerouslySetInnerHTML={{ __html: shortDescription }}
+        />
         {renderPrice}
         {renderButton}
+        <StyledAccordion
+          title="Opis produktu"
+          content={description}
+          isAccordionOpen
+        />
       </DetailsWrapper>
     </Wrapper>
   );

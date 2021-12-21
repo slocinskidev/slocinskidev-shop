@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import breakpoint from 'utils/breakpoints';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const StyledGatsbyImage = styled(GatsbyImage)`
   height: 400px;
@@ -12,5 +13,13 @@ export const Wrapper = styled.div`
 
   @media ${breakpoint.device.md} {
     padding: ${({ theme }) => theme.variable.paddingWrapper};
+  }
+`;
+
+export const Slider = styled(Swiper)`
+  .swiper-pagination {
+    .swiper-pagination-bullet-active {
+      background-color: ${({ theme }) => theme.color.secondary};
+    }
   }
 `;

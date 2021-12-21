@@ -3,6 +3,7 @@ export namespace BUTTON {
     LINK = 'link',
     CONTAINED = 'contained',
     OUTLINE = 'outline',
+    ACCORDION = 'accordion',
   }
 }
 
@@ -12,7 +13,9 @@ export interface ButtonProps
     HTMLButtonElement
   > {
   variant?: BUTTON.VARIANT;
-  isIcon?: boolean;
+  icon?: JSX.Element;
+  iconRight?: boolean;
+  iconLeft?: boolean;
   link?: string;
   className?: string;
 }

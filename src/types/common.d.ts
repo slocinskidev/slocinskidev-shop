@@ -18,6 +18,7 @@ declare namespace CommonTypes {
     id: string;
     link: string;
     description: string;
+    shortDescription: string;
     image: ImageType;
     name: string;
     productCategories: {

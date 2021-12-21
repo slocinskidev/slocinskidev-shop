@@ -3,13 +3,15 @@ import { Link } from 'gatsby';
 
 import { BUTTON, ButtonProps } from './model.d';
 
-import { Content, Wrapper, StyledRightArrow } from './Button.styles';
+import { Content, Wrapper } from './Button.styles';
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = BUTTON.VARIANT.LINK,
-      isIcon,
+      icon,
+      iconRight = true,
+      iconLeft,
       link,
       children = '',
       className,
@@ -17,12 +19,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const showIcon = isIcon ? <StyledRightArrow /> : null;
+    const showIcon = icon ? icon : null;
 
     const buttonContent = (
       <Content>
+        {iconLeft && showIcon}
         <span>{children}</span>
-        {showIcon}
+        {iconRight && showIcon}
       </Content>
     );
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import { getImage } from 'gatsby-plugin-image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper';
+import { SwiperSlide } from 'swiper/react';
+
+import { swiperOptions } from './options';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { StyledGatsbyImage, Wrapper } from './ProductGallery.styles';
+import { Slider, StyledGatsbyImage, Wrapper } from './ProductGallery.styles';
 
 const ProductGallery = ({
   image,
@@ -17,35 +18,29 @@ const ProductGallery = ({
 }) => {
   const isGallery = gallery.length;
 
-  const gatsbyImage = getImage(image.localFile);
+  const renderImage = (img: CommonTypes.ImageType) => {
+    if (!img) return null;
 
-  const renderImage = gatsbyImage ? (
-    <StyledGatsbyImage image={gatsbyImage} alt={image.altText} />
-  ) : null;
+    const { localFile, altText } = img;
+
+    const gatsbyImage = getImage(localFile);
+
+    const renderComponent = gatsbyImage ? (
+      <StyledGatsbyImage image={gatsbyImage} alt={altText} />
+    ) : null;
+
+    return renderComponent;
+  };
 
   const renderGallery = isGallery ? (
-    <Swiper
-      modules={[Pagination]}
-      spaceBetween={50}
-      slidesPerView={1}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      {gallery?.map(({ localFile, altText, id }) => {
-        const gatsbyImage = getImage(localFile);
-
-        if (!gatsbyImage) return null;
-
-        return (
-          <SwiperSlide key={id}>
-            <StyledGatsbyImage image={gatsbyImage} alt={altText} />
-          </SwiperSlide>
-        );
+    <Slider {...swiperOptions}>
+      {gallery?.map((image) => {
+        return <SwiperSlide key={image.id}>{renderImage(image)}</SwiperSlide>;
       })}
-    </Swiper>
+    </Slider>
   ) : null;
 
-  const renderProductGallery = isGallery ? renderGallery : renderImage;
+  const renderProductGallery = isGallery ? renderGallery : renderImage(image);
 
   return <Wrapper>{renderProductGallery}</Wrapper>;
 };

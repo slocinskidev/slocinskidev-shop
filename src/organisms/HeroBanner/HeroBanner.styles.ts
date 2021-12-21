@@ -1,6 +1,12 @@
 import Button from 'atoms/Button';
 import styled from 'styled-components';
 import breakpoint from 'utils/breakpoints';
+import RightArrow from 'atoms/SVG/RightArrow';
+
+export const StyledRightArrow = styled(RightArrow)`
+  margin-left: 1rem;
+  width: 25px;
+`;
 
 export const Wrapper = styled.section`
   display: grid;
