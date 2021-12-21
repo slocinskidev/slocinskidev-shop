@@ -6,12 +6,14 @@ import { ROOT_PATH } from 'utils/constants';
 
 import { NavigationProps } from './model';
 
-import { Wrapper, StyledLogo, NavList, NavItem } from './styles';
+import { Wrapper, StyledLogo, NavList, NavItem } from './Navigation.styles';
 
 const Navigation: FC<NavigationProps> = ({ isActive, navigation }) => {
   const renderNavigationItems = navigation?.map(({ label, path }) => (
     <NavItem key={label}>
-      <Link to={path}>{label}</Link>
+      <Link to={path} activeClassName="active">
+        {label}
+      </Link>
     </NavItem>
   ));
 

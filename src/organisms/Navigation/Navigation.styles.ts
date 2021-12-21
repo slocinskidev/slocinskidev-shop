@@ -42,7 +42,7 @@ export const NavList = styled.ul`
     font-size: 1.8rem;
     display: flex;
     align-items: center;
-  } ;
+  }
 `;
 
 export const NavItem = styled.li`
@@ -54,6 +54,10 @@ export const NavItem = styled.li`
   font-weight: ${({ theme }) => theme.font.weight.bold};
 
   &:hover {
+    color: ${({ theme }) => theme.color.secondary};
+  }
+
+  .active {
     color: ${({ theme }) => theme.color.secondary};
   }
 `;

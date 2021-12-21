@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 
 import { BUTTON, ButtonProps } from './model.d';
 
-import { Content, Wrapper, StyledRightArrow } from './styles';
+import { Content, Wrapper, StyledRightArrow } from './Button.styles';
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (

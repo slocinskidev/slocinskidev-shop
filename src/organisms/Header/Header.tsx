@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import Logo, { LOGO } from 'atoms/Logo';
+import { LOGO } from 'atoms/Logo';
 import Navigation from 'organisms/Navigation';
 import Hamburger from 'atoms/Hamburger';
 
 import { ROOT_PATH } from 'utils/constants';
 
-import { Wrapper, StyledLogo } from './styles';
+import { Wrapper, StyledLogo } from './Header.styles';
 
 const Header = ({
   navigation,

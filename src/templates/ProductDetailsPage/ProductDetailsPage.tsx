@@ -2,10 +2,11 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { getImage } from 'gatsby-plugin-image';
 
-import { ProductName } from 'organisms/ProductList/styles';
+import Button, { BUTTON } from 'atoms/Button';
 import { STRING } from 'utils/constants';
 
 import {
+  ProductName,
   CategoriesList,
   Description,
   Price,
@@ -14,8 +15,7 @@ import {
   StyledGatsbyImage,
   StyledButton,
   Wrapper,
-} from './styles';
-import Button, { BUTTON } from 'atoms/Button';
+} from './ProductDetailsPage.styles';
 
 const ProductDetailsPage = ({
   data: { product },

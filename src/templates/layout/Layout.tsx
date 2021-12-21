@@ -4,12 +4,12 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import Header from 'organisms/Header';
 import Footer from 'organisms/Footer';
-import GlobalStyle from 'styles/globalStyle';
-import { theme } from 'styles/mainTheme';
 
 import { LayoutQueryType } from './model';
 
-import { Wrapper } from './styles';
+import GlobalStyle from 'styles/globalStyle';
+import { theme } from 'styles/mainTheme';
+import { Wrapper } from './Layout.styles';
 
 const Layout: FC = ({ children }) => {
   const {

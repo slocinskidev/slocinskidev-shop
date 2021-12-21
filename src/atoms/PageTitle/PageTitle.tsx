@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Title } from './styles';
+import { Title } from './PageTitle.styles';
 
 const PageTitle = ({
   children,

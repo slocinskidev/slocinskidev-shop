@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 
 import { HamburgerProps } from './model';
 
-import { Wrapper, Bar } from './styles';
+import { Wrapper, Bar } from './Hamburger.styles';
 
-const Hamburger: FC<HamburgerProps> = ({ isActive, setIsActive }) => {
+const Hamburger = ({ isActive, setIsActive }: HamburgerProps) => {
   return (
     <Wrapper
       isActive={isActive}

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Logo, { LOGO } from 'atoms/Logo';
+import { LOGO } from 'atoms/Logo';
 
 import { FooterProps } from './model';
 
-import { Wrapper, StyledLink, StyledLogo } from './styles';
+import { Wrapper, StyledLink, StyledLogo } from './Footer.styles';
 
 const Footer = ({
   footer: {

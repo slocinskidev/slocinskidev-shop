@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
-import { graphql } from 'gatsby';
+import React from 'react';
 
 import HeroBanner from 'organisms/HeroBanner';
 
-const HomePage = ({ pageContext }: any) => {
+import { Wrapper } from './HomePage.styles';
+
+const HomePage = () => {
   return (
-    <>
+    <Wrapper>
       <HeroBanner />
-      {pageContext.title}
-    </>
+    </Wrapper>
   );
 };
 

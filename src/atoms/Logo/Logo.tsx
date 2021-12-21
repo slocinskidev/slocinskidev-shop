@@ -1,12 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { graphql, Link, useStaticQuery } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import { LogoProps, LOGO } from './model.d';
 import { STRING } from 'utils/constants';
 
-const Logo: FC<LogoProps> = ({ variant, link, linkAlt, className }) => {
+const Logo = ({ variant, link, linkAlt, className }: LogoProps) => {
   const getLogo = (logoVariant?: LOGO.VARIANT) => {
     const {
       wpLayout: {

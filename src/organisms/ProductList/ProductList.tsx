@@ -9,7 +9,7 @@ import {
   StyledGatsbyImage,
   PriceSection,
   RegularPrice,
-} from './styles';
+} from './ProductList.styles';
 
 const ProductList = ({ products }: { products: CommonTypes.ProductType[] }) => {
   if (!products) return null;
@@ -19,7 +19,7 @@ const ProductList = ({ products }: { products: CommonTypes.ProductType[] }) => {
       const gatsbyImage = getImage(image.localFile);
 
       const renderImage = gatsbyImage ? (
-        <StyledGatsbyImage image={gatsbyImage} alt={image.altText} />
+        <StyledGatsbyImage image={gatsbyImage} alt={image?.altText} />
       ) : null;
 
       const renderPrice = price ? (

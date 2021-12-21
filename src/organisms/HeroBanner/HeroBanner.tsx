@@ -12,14 +12,14 @@ import {
   Description,
   StyledImage,
   StyledButton,
-} from './styles';
+} from './HeroBanner.styles';
 
 const HeroBanner = () => {
   const {
-    wpPage: { heroBanner },
+    homepage: { heroBanner },
   } = useStaticQuery(graphql`
     {
-      wpPage(slug: { eq: "homepage" }) {
+      homepage: wpPage(slug: { eq: "homepage" }) {
         heroBanner {
           heading
           description

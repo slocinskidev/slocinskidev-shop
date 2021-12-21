@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 import ProductList from 'organisms/ProductList';
 
 import { ProductsPageNodesType } from './model';
 
-import { Wrapper, StyledPageTitle } from './styles';
+import { Wrapper, StyledPageTitle } from './ProductsPage.styles';
 
 const ProductsPage = ({
   data: {
