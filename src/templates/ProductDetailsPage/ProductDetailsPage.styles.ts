@@ -1,8 +1,17 @@
 import styled from 'styled-components';
-import { GatsbyImage } from 'gatsby-plugin-image';
 import Button from 'atoms/Button';
+import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.section`
+  display: grid;
+
+  @media ${breakpoint.device.md} {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6rem;
+  }
+`;
+
+export const DetailsWrapper = styled.div`
   padding: ${({ theme }) => theme.variable.paddingWrapper};
 `;
 
@@ -31,10 +40,6 @@ export const RegularPrice = styled.section`
   margin-left: 1rem;
   color: ${({ theme }) => theme.color.gray3};
   text-decoration: line-through;
-`;
-
-export const StyledGatsbyImage = styled(GatsbyImage)`
-  height: 400px;
 `;
 
 export const CategoriesList = styled.ul`

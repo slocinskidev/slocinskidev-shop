@@ -24,7 +24,7 @@ declare namespace CommonTypes {
       nodes: { id: string; name: string }[];
     };
     price: string;
+    galleryImages: { nodes: ImageType[] };
     regularPrice?: string;
-    galleryImages?: { nodes: ImageType[] };
   };
 }

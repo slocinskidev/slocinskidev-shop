@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { getImage } from 'gatsby-plugin-image';
 
 import Button, { BUTTON } from 'atoms/Button';
 import { STRING } from 'utils/constants';
@@ -12,10 +11,11 @@ import {
   Price,
   PriceSection,
   RegularPrice,
-  StyledGatsbyImage,
   StyledButton,
   Wrapper,
+  DetailsWrapper,
 } from './ProductDetailsPage.styles';
+import ProductGallery from 'molecules/ProductGallery';
 
 const ProductDetailsPage = ({
   data: { product },
@@ -24,14 +24,15 @@ const ProductDetailsPage = ({
 }) => {
   if (!product) return null;
 
-  const { name, description, image, price, regularPrice, productCategories } =
-    product;
-
-  const gatsbyImage = getImage(image.localFile);
-
-  const renderImage = gatsbyImage ? (
-    <StyledGatsbyImage image={gatsbyImage} alt={image.altText} />
-  ) : null;
+  const {
+    name,
+    description,
+    image,
+    galleryImages,
+    price,
+    regularPrice,
+    productCategories,
+  } = product;
 
   const renderPrice = price ? (
     <PriceSection>
@@ -65,12 +66,14 @@ const ProductDetailsPage = ({
 
   return (
     <Wrapper>
-      {renderImage}
-      <ProductName>{name}</ProductName>
-      {renderCategories}
-      <Description dangerouslySetInnerHTML={{ __html: description }} />
-      {renderPrice}
-      {renderButton}
+      <ProductGallery image={image} gallery={galleryImages.nodes} />
+      <DetailsWrapper>
+        <ProductName>{name}</ProductName>
+        {renderCategories}
+        <Description dangerouslySetInnerHTML={{ __html: description }} />
+        {renderPrice}
+        {renderButton}
+      </DetailsWrapper>
     </Wrapper>
   );
 };
