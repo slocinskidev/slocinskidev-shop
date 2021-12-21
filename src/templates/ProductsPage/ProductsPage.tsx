@@ -29,7 +29,7 @@ export const query = graphql`
       title
       content
     }
-    allWpProduct {
+    allWpProduct(sort: { fields: date, order: DESC }) {
       nodes {
         ...ProductFragment
       }
