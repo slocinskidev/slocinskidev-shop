@@ -14,12 +14,18 @@ import {
 const ProductCard = ({ product }: { product: CommonTypes.ProductType }) => {
   if (!product) return null;
 
-  const { id, image, name, price, regularPrice, link } = product;
+  const {
+    image: { localFile, altText },
+    name,
+    price,
+    regularPrice,
+    link,
+  } = product;
 
-  const gatsbyImage = getImage(image.localFile);
+  const gatsbyImage = getImage(localFile);
 
   const renderImage = gatsbyImage ? (
-    <StyledGatsbyImage image={gatsbyImage} alt={image?.altText} />
+    <StyledGatsbyImage image={gatsbyImage} alt={altText} />
   ) : null;
 
   const renderPrice = price ? (
@@ -32,7 +38,7 @@ const ProductCard = ({ product }: { product: CommonTypes.ProductType }) => {
   ) : null;
 
   return (
-    <Wrapper key={id}>
+    <Wrapper>
       <Link to={link}>
         {renderImage}
         <ProductName>{name}</ProductName>

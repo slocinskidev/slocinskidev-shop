@@ -7,6 +7,9 @@ export const StyledGatsbyImage = styled(GatsbyImage)`
 `;
 
 export const Wrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+
   @media ${breakpoint.device.md} {
     padding: ${({ theme }) => theme.variable.paddingWrapper};
   }

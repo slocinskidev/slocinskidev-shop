@@ -4,6 +4,7 @@ import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.section`
   display: grid;
+  margin-top: 4rem;
 
   @media ${breakpoint.device.md} {
     grid-template-columns: repeat(2, 1fr);
@@ -16,7 +17,7 @@ export const DetailsWrapper = styled.div`
 `;
 
 export const ProductName = styled.h3`
-  font-size: ${({ theme }) => theme.font.size.md};
+  font-size: ${({ theme }) => theme.font.size.lg};
   margin: 2rem 0 1rem;
 `;
 
@@ -49,5 +50,6 @@ export const CategoriesList = styled.ul`
 `;
 
 export const StyledButton = styled(Button)`
+  font-size: ${({ theme }) => theme.font.size.xxs};
   padding: 0.5rem 1rem;
 `;

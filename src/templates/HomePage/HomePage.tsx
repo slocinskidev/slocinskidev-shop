@@ -6,7 +6,8 @@ import ProductList from 'organisms/ProductList';
 
 import { HomePageNodesType } from './model';
 
-import { StyledPageTitle, Wrapper } from './HomePage.styles';
+import { StyledButton, StyledPageTitle, Wrapper } from './HomePage.styles';
+import { BUTTON } from 'atoms/Button';
 
 const HomePage = ({
   data: {
@@ -20,6 +21,9 @@ const HomePage = ({
       <HeroBanner />
       <StyledPageTitle>Ostatnio dodane produkty</StyledPageTitle>
       <ProductList products={products} />
+      <StyledButton variant={BUTTON.VARIANT.LINK} isIcon>
+        więcej produktów
+      </StyledButton>
     </Wrapper>
   );
 };
