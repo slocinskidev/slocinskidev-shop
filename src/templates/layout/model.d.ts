@@ -1,8 +1,11 @@
 export interface LayoutQueryType {
-  allWpMenuItem: {
+  menu: {
     nodes: CommonTypes.NavigationType[];
   };
-  wpLayout: {
+  footer: {
     footer: CommonTypes.FooterType;
+  };
+  header: {
+    promoInfo: { promoInfo?: string };
   };
 }

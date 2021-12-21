@@ -13,17 +13,20 @@ import { Wrapper } from './Layout.styles';
 
 const Layout: FC = ({ children }) => {
   const {
-    allWpMenuItem: { nodes: navigation },
-    wpLayout: { footer },
+    menu: { nodes: navigation },
+    footer: { footer },
+    header: {
+      promoInfo: { promoInfo },
+    },
   } = useStaticQuery<LayoutQueryType>(graphql`
     {
-      allWpMenuItem(filter: { locations: { eq: PRIMARY } }) {
+      menu: allWpMenuItem(filter: { locations: { eq: PRIMARY } }) {
         nodes {
           label
           path
         }
       }
-      wpLayout(slug: { eq: "footer" }) {
+      footer: wpLayout(slug: { eq: "footer" }) {
         footer {
           description
           url {
@@ -32,13 +35,18 @@ const Layout: FC = ({ children }) => {
           }
         }
       }
+      header: wpLayout(slug: { eq: "header" }) {
+        promoInfo {
+          promoInfo
+        }
+      }
     }
   `);
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header navigation={navigation} />
+      <Header navigation={navigation} promoInfo={promoInfo} />
       <Wrapper>{children}</Wrapper>
       <Footer footer={footer} />
     </ThemeProvider>

@@ -9,10 +9,6 @@ export const Bar = styled.span`
   background-color: ${({ theme }) => theme.color.tertiary};
   transition: ${({ theme }) => theme.transition('background-color')};
 
-  @media ${breakpoint.device.md} {
-    display: none;
-  }
-
   &::before,
   &::after {
     border-radius: 5px;
@@ -43,6 +39,10 @@ export const Wrapper = styled.button<{ isActive: boolean }>`
   justify-content: center;
   z-index: 10;
   overflow: hidden;
+
+  @media ${breakpoint.device.md} {
+    display: none;
+  }
 
   ${({ isActive }) =>
     isActive &&

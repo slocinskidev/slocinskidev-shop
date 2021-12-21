@@ -13,9 +13,19 @@ export const Wrapper = styled.header`
 `;
 
 export const StyledLogo = styled(Logo)`
+  display: flex;
   width: 45px;
 
   @media ${breakpoint.device.md} {
+    display: none;
+  }
+`;
+
+export const StyledDesktopLogo = styled(Logo)`
+  display: none;
+
+  @media ${breakpoint.device.md} {
+    display: flex;
     width: 280px;
   }
 `;

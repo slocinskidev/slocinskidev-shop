@@ -83,7 +83,7 @@ const Logo = ({ variant, link, linkAlt, className }: LogoProps) => {
   };
 
   const renderComponent = link ? (
-    <Link to={link} aria-label={linkAlt}>
+    <Link className={className} to={link} aria-label={linkAlt}>
       {getLogo(variant)}
     </Link>
   ) : (

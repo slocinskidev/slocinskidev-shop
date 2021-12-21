@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import Logo from 'atoms/Logo';
 import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.nav<{ isActive: boolean }>`
@@ -9,11 +8,10 @@ export const Wrapper = styled.nav<{ isActive: boolean }>`
   width: 100%;
   height: 100%;
   display: grid;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.color.white};
   z-index: 9;
-  grid-template-rows: min-content auto;
   color: ${({ theme }) => theme.color.tertiary};
   visibility: hidden;
   opacity: 0;
@@ -60,12 +58,4 @@ export const NavItem = styled.li`
   .active {
     color: ${({ theme }) => theme.color.secondary};
   }
-`;
-
-export const StyledLogo = styled(Logo)`
-  margin-top: 10rem;
-
-  @media ${breakpoint.device.md} {
-    display: none;
-  } ;
 `;
