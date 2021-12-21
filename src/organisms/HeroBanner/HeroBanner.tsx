@@ -1,5 +1,4 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import { BUTTON } from 'atoms/Button';
@@ -15,29 +14,11 @@ import {
   StyledRightArrow,
 } from './HeroBanner.styles';
 
-const HeroBanner = () => {
-  const {
-    homepage: { heroBanner },
-  } = useStaticQuery(graphql`
-    {
-      homepage: wpPage(slug: { eq: "homepage" }) {
-        heroBanner {
-          heading
-          description
-          image {
-            ...ImageFragment
-          }
-          button {
-            ... on WpPage {
-              title
-              uri
-            }
-          }
-        }
-      }
-    }
-  `);
-
+const HeroBanner = ({
+  heroBanner,
+}: {
+  heroBanner: CommonTypes.HeroBannerType;
+}) => {
   if (!heroBanner) return null;
 
   const { heading, description, image, button } = heroBanner;

@@ -38,4 +38,16 @@ declare namespace CommonTypes {
       uri: string;
     };
   };
+
+  type ButtonType = {
+    title: string;
+    uri: string;
+  };
+
+  type HeroBannerType = {
+    heading: string;
+    description: string;
+    image: ImageType;
+    button: ButtonType;
+  };
 }
