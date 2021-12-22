@@ -45,6 +45,7 @@ export const ProductName = styled.h3`
 
 export const ShortDescription = styled.section`
   font-size: ${({ theme }) => theme.font.size.xs};
+  line-height: 1.5;
   margin-bottom: 8rem;
 `;
 

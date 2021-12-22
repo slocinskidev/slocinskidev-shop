@@ -1,6 +1,1 @@
-import React from 'react';
-import Layout from './src/templates/layout';
-
-export function wrapPageElement({ element, props }) {
-  return <Layout {...props}>{element}</Layout>;
-}
+export { wrapPageElement, wrapRootElement } from './root-wrapper';
