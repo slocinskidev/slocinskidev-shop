@@ -38,6 +38,7 @@ export const Wrapper = styled.section<{ isCollapsed: boolean }>`
         height: auto;
         max-height: max-content;
         padding-bottom: 2rem;
+        line-height: 1.5;
       }
 
       ${StyledArrowDown} {

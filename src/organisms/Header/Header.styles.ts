@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Logo from 'atoms/Logo';
 import breakpoint from 'utils/breakpoints';
-import Basket from 'atoms/SVG/Basket';
 
 export const Wrapper = styled.header`
   display: flex;
@@ -28,9 +27,4 @@ export const StyledDesktopLogo = styled(Logo)`
     display: flex;
     width: 280px;
   }
-`;
-
-export const StyledBasket = styled(Basket)`
-  width: 40px;
-  height: 40px;
 `;

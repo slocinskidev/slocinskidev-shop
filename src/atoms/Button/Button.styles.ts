@@ -65,7 +65,7 @@ export const Wrapper = styled.button<{
     css`
       text-transform: uppercase;
       font-weight: ${({ theme }) => theme.font.weight.medium};
-      font-size: ${({ theme }) => theme.font.size.sm};
+      font-size: ${({ theme }) => theme.font.size.md};
       padding-left: 0;
       padding-right: 0;
       transition: ${({ theme }) => theme.transition('color')};

@@ -5,6 +5,8 @@ export const ProductFragment = graphql`
     id
     link
     description
+    databaseId
+    nodeType
     shortDescription
     galleryImages {
       nodes {

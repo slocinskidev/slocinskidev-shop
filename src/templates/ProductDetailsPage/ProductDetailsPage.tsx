@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import Button, { BUTTON } from 'atoms/Button';
 import ProductGallery from 'molecules/ProductGallery';
+import AddToCartButton from 'molecules/AddToCartButton';
 import { STRING } from 'utils/constants';
 
 import {
@@ -16,7 +17,6 @@ import {
   Wrapper,
   DetailsWrapper,
   StyledAccordion,
-  StyledRightArrow,
 } from './ProductDetailsPage.styles';
 
 const ProductDetailsPage = ({
@@ -61,11 +61,7 @@ const ProductDetailsPage = ({
     </CategoriesList>
   ) : null;
 
-  const renderButton = (
-    <Button variant={BUTTON.VARIANT.CONTAINED} icon={<StyledRightArrow />}>
-      Dodaj do koszyka
-    </Button>
-  );
+  const renderButton = <AddToCartButton product={product} />;
 
   return (
     <Wrapper>
@@ -78,11 +74,7 @@ const ProductDetailsPage = ({
         />
         {renderPrice}
         {renderButton}
-        <StyledAccordion
-          title="Opis produktu"
-          content={description}
-          isAccordionOpen
-        />
+        <StyledAccordion title="Opis" content={description} isAccordionOpen />
       </DetailsWrapper>
     </Wrapper>
   );

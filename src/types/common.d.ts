@@ -50,4 +50,19 @@ declare namespace CommonTypes {
     image: ImageType;
     button: ButtonType;
   };
+
+  type CartProductType = {
+    id: string;
+    image: CommonTypes.ImageType;
+    name: string;
+    price: number;
+    qty: number;
+    totalPrice: number;
+  };
+
+  type CartType = {
+    products: CommonTypes.CartProductType[];
+    totalProductsCount: number;
+    totalProductsPrice: number;
+  };
 }

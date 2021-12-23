@@ -19,13 +19,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const showIcon = icon ? icon : null;
+    const renderIcon = icon ? icon : null;
 
     const buttonContent = (
       <Content>
-        {iconLeft && showIcon}
+        {iconLeft && renderIcon}
         <span>{children}</span>
-        {iconRight && showIcon}
+        {iconRight && renderIcon}
       </Content>
     );
 

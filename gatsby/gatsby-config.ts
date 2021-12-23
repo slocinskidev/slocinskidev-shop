@@ -35,6 +35,8 @@ export const plugins = [
       src: path.join(PROJECT_ROOT, 'src'),
       apollo: path.join(PROJECT_ROOT, 'src/apollo'),
       providers: path.join(PROJECT_ROOT, 'src/providers'),
+      queries: path.join(PROJECT_ROOT, 'src/queries'),
+      mutations: path.join(PROJECT_ROOT, 'src/mutations'),
     },
   },
   'gatsby-plugin-image',

@@ -5,15 +5,11 @@ import Navigation from 'organisms/Navigation';
 import Hamburger from 'atoms/Hamburger';
 import PromoInfo from 'molecules/PromoInfo';
 import Button from 'atoms/Button';
+import CartIcon from 'molecules/CartIcon';
 
 import { ROOT_PATH } from 'utils/constants';
 
-import {
-  Wrapper,
-  StyledLogo,
-  StyledDesktopLogo,
-  StyledBasket,
-} from './Header.styles';
+import { Wrapper, StyledLogo, StyledDesktopLogo } from './Header.styles';
 
 const Header = ({
   navigation,
@@ -41,7 +37,7 @@ const Header = ({
         <StyledLogo variant={LOGO.VARIANT.SECONDARY} link={ROOT_PATH} />
         <StyledDesktopLogo variant={LOGO.VARIANT.PRIMARY} link={ROOT_PATH} />
         <Navigation isActive={isActive} navigation={navigation} />
-        <Button icon={<StyledBasket />} link="/cart/" />
+        <Button icon={<CartIcon />} link="/cart/" />
       </Wrapper>
       {renderPromoInfo}
     </>
