@@ -18,8 +18,6 @@ const ProductsPage = ({
 }) => {
   const [cart, setCart] = useContext(CartContext) as ContextType;
 
-  console.log(cart);
-
   return (
     <Wrapper>
       <StyledPageTitle>{title}</StyledPageTitle>

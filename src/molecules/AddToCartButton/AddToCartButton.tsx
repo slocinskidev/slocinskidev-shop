@@ -3,21 +3,26 @@ import React, { useContext } from 'react';
 import Button, { BUTTON } from 'atoms/Button';
 import { CartContext } from 'providers/CartProvider';
 import { isBrowser } from 'utils/isBrowser';
-import { addFirstProduct } from 'utils/functions';
+import { addFirstProduct, updateCart } from 'utils/functions';
 
 import { ContextType } from 'providers/model';
 
 import { StyledRightArrow } from './AddToCartButton.styles';
 
 const AddToCartButton = ({ product }: { product: CommonTypes.ProductType }) => {
-  const [cart, setCart] = useContext(CartContext) as ContextType;
+  const [, setCart] = useContext(CartContext) as ContextType;
 
   const handleAddToCartClick = () => {
     if (!isBrowser) return;
 
-    const existingCart = localStorage.getItem('woo-shop-cart');
+    const storageCart = localStorage.getItem('woo-shop-cart');
 
-    if (existingCart) {
+    if (storageCart) {
+      const existingCart: CommonTypes.CartType = JSON.parse(storageCart);
+      const qtyToBeAdded = 1;
+
+      const updatedCart = updateCart(existingCart, product, qtyToBeAdded);
+      setCart(updatedCart);
     } else {
       const newCart = addFirstProduct(product);
       setCart(newCart);

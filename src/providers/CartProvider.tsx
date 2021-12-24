@@ -5,6 +5,7 @@ export const CartContext = createContext({});
 
 const CartProvider = ({ children }: { children?: React.ReactNode }) => {
   const [cart, setCart] = useState<CommonTypes.CartType | {}>([{}, () => {}]);
+  console.log('Cart: ', cart);
 
   useEffect(() => {
     if (!isBrowser) return;
