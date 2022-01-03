@@ -5,10 +5,14 @@ import { NavigationProps } from './model';
 
 import { Wrapper, NavList, NavItem } from './Navigation.styles';
 
-const Navigation = ({ isActive, navigation }: NavigationProps) => {
+const Navigation = ({ isActive, setIsActive, navigation }: NavigationProps) => {
   const renderNavigationItems = navigation?.map(({ label, path }) => (
     <NavItem key={label}>
-      <Link to={path} activeClassName="active">
+      <Link
+        to={path}
+        activeClassName="active"
+        onClick={() => setIsActive((prevState) => !prevState)}
+      >
         {label}
       </Link>
     </NavItem>
