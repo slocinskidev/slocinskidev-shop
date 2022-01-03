@@ -18,4 +18,5 @@ export interface ButtonProps
   iconLeft?: boolean;
   link?: string;
   className?: string;
+  activeClassName?: string;
 }

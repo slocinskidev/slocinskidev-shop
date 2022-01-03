@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { graphql } from 'gatsby';
 
 import CartInfo from 'molecules/CartInfo';
+import CartProducts from 'organisms/CartProducts';
 import { CartContext } from 'providers/CartProvider';
 
 import { ContextType } from 'providers/model';
@@ -18,10 +19,18 @@ const ProductsPage = ({
 }) => {
   const [cart, setCart] = useContext(CartContext) as ContextType;
 
+  const IS_PRODUCT_IN_CART = cart.totalProductsCount > 0;
+
+  const renderCartView = IS_PRODUCT_IN_CART ? (
+    <CartProducts />
+  ) : (
+    <CartInfo cartInfo={cartInfo} />
+  );
+
   return (
     <Wrapper>
       <StyledPageTitle>{title}</StyledPageTitle>
-      <CartInfo cartInfo={cartInfo} />
+      {renderCartView}
     </Wrapper>
   );
 };

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Logo from 'atoms/Logo';
+import Button from 'atoms/Button';
 import breakpoint from 'utils/breakpoints';
+import { StyledBadge } from 'molecules/CartIcon/CartIcon.styles';
 
 export const Wrapper = styled.header`
   display: flex;
@@ -9,6 +11,14 @@ export const Wrapper = styled.header`
   max-width: ${({ theme }) => theme.variable.wrapper};
   padding: 1rem 2rem;
   margin: 0 auto;
+
+  .active {
+    color: ${({ theme }) => theme.color.secondary};
+
+    ${StyledBadge} {
+      background-color: ${({ theme }) => theme.color.secondary};
+    }
+  }
 `;
 
 export const StyledLogo = styled(Logo)`

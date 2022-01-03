@@ -14,6 +14,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconLeft,
       link,
       children = '',
+      activeClassName = 'active',
       className,
       ...props
     },
@@ -24,13 +25,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const buttonContent = (
       <Content>
         {iconLeft && renderIcon}
-        <span>{children}</span>
+        {children && <span>{children}</span>}
         {iconRight && renderIcon}
       </Content>
     );
 
     const renderButton = link ? (
-      <Wrapper as={Link} className={className} to={link} variant={variant}>
+      <Wrapper
+        as={Link}
+        className={className}
+        to={link}
+        variant={variant}
+        activeClassName={activeClassName}
+      >
         {buttonContent}
       </Wrapper>
     ) : (
