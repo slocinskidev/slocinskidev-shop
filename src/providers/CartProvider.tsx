@@ -4,7 +4,7 @@ import { isBrowser } from 'utils/isBrowser';
 export const CartContext = createContext({});
 
 const CartProvider = ({ children }: { children?: React.ReactNode }) => {
-  const [cart, setCart] = useState<CommonTypes.CartType | {}>([{}, () => {}]);
+  const [cart, setCart] = useState<CommonTypes.CartType | {}>({});
   console.log('Cart: ', cart);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
   }, []);
 
   return (
-    <CartContext.Provider value={[cart, setCart]}>
+    <CartContext.Provider value={{ cart, setCart }}>
       {children}
     </CartContext.Provider>
   );

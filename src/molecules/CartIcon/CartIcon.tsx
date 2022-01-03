@@ -6,7 +6,7 @@ import { ContextType } from 'providers/model';
 import { StyledBadge, StyledBasket } from './CartIcon.styles';
 
 const CartIcon = () => {
-  const [cart] = useContext(CartContext) as ContextType;
+  const { cart } = useContext(CartContext) as ContextType;
 
   const totalProductsCount: number =
     cart && Object.keys(cart).length ? cart.totalProductsCount : null;

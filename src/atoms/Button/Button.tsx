@@ -21,14 +21,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const renderIcon = icon ? icon : null;
+    const isIcon = icon ? true : false;
 
-    const buttonContent = (
-      <Content>
-        {iconLeft && renderIcon}
-        {children && <span>{children}</span>}
-        {iconRight && renderIcon}
-      </Content>
-    );
+    const buttonContent =
+      children || isIcon ? (
+        <Content>
+          {iconLeft && renderIcon}
+          {children && <span>{children}</span>}
+          {iconRight && renderIcon}
+        </Content>
+      ) : null;
 
     const renderButton = link ? (
       <Wrapper

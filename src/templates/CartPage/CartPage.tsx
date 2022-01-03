@@ -17,7 +17,7 @@ const ProductsPage = ({
 }: {
   data: CartPageNodesType;
 }) => {
-  const [cart, setCart] = useContext(CartContext) as ContextType;
+  const { cart } = useContext(CartContext) as ContextType;
 
   const IS_PRODUCT_IN_CART = cart.totalProductsCount > 0;
 

@@ -55,6 +55,7 @@ declare namespace CommonTypes {
     id: string;
     image: CommonTypes.ImageType;
     name: string;
+    shortDescription: string;
     price: number;
     qty: number;
     totalPrice: number;

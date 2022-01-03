@@ -7,14 +7,15 @@ export const getFloatVal = (string: string) => {
 };
 
 export const createNewProduct = (
-  product: CommonTypes.ProductType,
+  product: CommonTypes.ProductType | CommonTypes.CartProductType,
   productPrice: number,
   qty: number
-) => {
+): CommonTypes.CartProductType => {
   return {
     id: product.id,
     image: product.image,
     name: product.name,
+    shortDescription: product.shortDescription,
     price: productPrice,
     qty: qty,
     totalPrice: parseFloat((productPrice * qty).toFixed(2)),
@@ -57,9 +58,9 @@ export const isProductInCart = (
 
 export const getUpdatedProducts = (
   existingProductInCart: CommonTypes.CartProductType[],
-  product: CommonTypes.ProductType,
-  qtyToBeAdded: number,
-  newQty: number | undefined = undefined
+  product: CommonTypes.ProductType | CommonTypes.CartProductType,
+  qtyToBeAdded: number | boolean,
+  newQty: number | boolean = false
 ): CommonTypes.CartProductType[] => {
   const productExistsIndex = isProductInCart(existingProductInCart, product.id);
 
@@ -67,15 +68,22 @@ export const getUpdatedProducts = (
     const updatedProducts = existingProductInCart;
     const updatedProduct = updatedProducts[productExistsIndex];
 
-    updatedProduct.qty = newQty ? newQty : updatedProduct.qty + qtyToBeAdded;
+    updatedProduct.qty = newQty
+      ? Number(newQty)
+      : updatedProduct.qty + Number(qtyToBeAdded);
     updatedProduct.totalPrice = parseFloat(
       (updatedProduct.price * updatedProduct.qty).toFixed(2)
     );
 
     return updatedProducts;
   } else {
-    const productPrice = getFloatVal(product.price);
-    const newProduct = createNewProduct(product, productPrice, qtyToBeAdded);
+    const productPrice = getFloatVal(String(product.price));
+
+    const newProduct = createNewProduct(
+      product,
+      productPrice,
+      Number(qtyToBeAdded)
+    );
     existingProductInCart.push(newProduct);
 
     return existingProductInCart;
@@ -84,9 +92,9 @@ export const getUpdatedProducts = (
 
 export const updateCart = (
   existingCart: CommonTypes.CartType,
-  product: CommonTypes.ProductType,
-  qtyToBeAdded: number,
-  newQty: number | undefined = undefined
+  product: CommonTypes.ProductType | CommonTypes.CartProductType,
+  qtyToBeAdded: number | boolean,
+  newQty: number | boolean = false
 ) => {
   const updatedProducts = getUpdatedProducts(
     existingCart.products,
@@ -108,6 +116,7 @@ export const updateCart = (
     id: product.id,
     image: product.image,
     name: product.name,
+    shortDescription: product.shortDescription,
     price: 0,
     qty: 0,
     totalPrice: 0,

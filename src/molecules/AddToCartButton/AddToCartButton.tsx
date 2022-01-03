@@ -10,7 +10,7 @@ import { ContextType } from 'providers/model';
 import { StyledRightArrow } from './AddToCartButton.styles';
 
 const AddToCartButton = ({ product }: { product: CommonTypes.ProductType }) => {
-  const [, setCart] = useContext(CartContext) as ContextType;
+  const { setCart } = useContext(CartContext) as ContextType;
 
   const handleAddToCartClick = () => {
     if (!isBrowser) return;
