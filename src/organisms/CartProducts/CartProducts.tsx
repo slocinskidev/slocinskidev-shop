@@ -1,22 +1,28 @@
 import React, { useContext } from 'react';
 
 import CartItem from 'molecules/CartItem';
+import PriceDetails from 'molecules/PriceDetails';
 import { CartContext } from 'providers/CartProvider';
 import { isBrowser } from 'utils/isBrowser';
+import { removeItemsFromCart } from 'utils/functions';
 
 import { ContextType } from 'providers/model';
 
 import { Wrapper } from './CartProducts.styles';
-import PriceDetails from 'molecules/PriceDetails';
 
 const CartProducts = () => {
   const { cart, setCart } = useContext(CartContext) as ContextType;
 
   const removeProductFromCart = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string,
   ) => {
     if (!isBrowser) return null;
-    console.log(e);
+    const updatedCart = removeItemsFromCart(id);
+
+    if (!updatedCart) return null;
+
+    setCart(updatedCart);
   };
 
   const renderCartItems =

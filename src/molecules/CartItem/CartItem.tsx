@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { getImage } from 'gatsby-plugin-image';
 
+import { isBrowser } from 'utils/isBrowser';
+import { updateCart } from 'utils/functions';
+
 import { CartItemProps } from './model';
 
 import {
@@ -12,17 +15,12 @@ import {
   StyledGatsbyImage,
   Wrapper,
 } from './CartItem.styles';
-import { isBrowser } from 'utils/isBrowser';
-import { updateCart } from 'utils/functions';
 
-const CartItem = ({
-  product,
-  setCart,
-  removeProductFromCart,
-}: CartItemProps) => {
+const CartItem = ({ product, setCart, removeProductFromCart }: CartItemProps) => {
   if (!product) return null;
 
   const {
+    id,
     image: { localFile, altText },
     name,
     shortDescription,
@@ -34,9 +32,7 @@ const CartItem = ({
 
   const gatsbyImage = getImage(localFile);
 
-  const renderImage = gatsbyImage ? (
-    <StyledGatsbyImage image={gatsbyImage} alt={altText} />
-  ) : null;
+  const renderImage = gatsbyImage ? <StyledGatsbyImage image={gatsbyImage} alt={altText} /> : null;
 
   const changeProductQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isBrowser) return null;
@@ -49,12 +45,7 @@ const CartItem = ({
     if (localCart) {
       const existingCart = JSON.parse(localCart);
 
-      const updatedCart = updateCart(
-        existingCart,
-        product,
-        false,
-        Number(newQty)
-      );
+      const updatedCart = updateCart(existingCart, product, false, Number(newQty));
       setCart(updatedCart);
     }
   };
@@ -64,9 +55,7 @@ const CartItem = ({
       {renderImage}
       <Content>
         <ProductName>{name}</ProductName>
-        <ShortDescription
-          dangerouslySetInnerHTML={{ __html: shortDescription }}
-        />
+        <ShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
         <Quantity
           type="number"
           min="1"
@@ -75,7 +64,7 @@ const CartItem = ({
         />
         {totalPrice.toFixed(2)} zł
       </Content>
-      <DeleteButton onClick={(e) => removeProductFromCart(e)} />
+      <DeleteButton onClick={(e) => removeProductFromCart(e, id)} />
     </Wrapper>
   );
 };
