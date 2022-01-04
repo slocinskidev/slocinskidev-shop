@@ -1,25 +1,29 @@
 import Button from 'atoms/Button';
 import { GatsbyImage } from 'gatsby-plugin-image';
+import Select, { SingleValue } from 'react-select';
 import styled from 'styled-components';
+import { theme } from 'styles/mainTheme';
 
 export const Wrapper = styled.li`
   display: grid;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray6};
   padding-bottom: 2rem;
   margin-bottom: 2rem;
-  grid-template-columns: 1fr 2fr min-content;
-
-  align-items: start;
-  gap: 1rem;
+  grid-template-columns: auto 2fr min-content;
+  /* align-items: start; */
+  gap: 2rem;
 `;
 
 export const StyledGatsbyImage = styled(GatsbyImage)`
-  width: 150px;
-  height: 150px;
+  min-width: 75px;
+  max-width: 150px;
+  aspect-ratio: 2 / 3;
+  justify-self: center;
 `;
 
 export const Content = styled.div`
   display: grid;
+  align-content: space-evenly;
 `;
 
 export const ProductName = styled.h3`
@@ -69,6 +73,55 @@ export const ShortDescription = styled.section`
   margin-bottom: 2rem;
 `;
 
-export const Quantity = styled.input`
-  width: 40px;
+export const StyledSelect = styled(Select)`
+  .Select__control {
+    height: 40px;
+    width: 80px;
+    border: 2px solid ${({ theme }) => theme.color.gray6};
+    cursor: pointer;
+    transition: ${({ theme }) => theme.transition('border-color')};
+  }
+
+  .Select__control:hover {
+    border: 2px solid ${({ theme }) => theme.color.secondary};
+  }
+
+  .Select__control--is-focused {
+    border: 2px solid ${({ theme }) => theme.color.secondary};
+    box-shadow: none;
+    outline: none;
+  }
+
+  .Select__control--is-selected {
+    outline: none !important;
+  }
+
+  .Select__indicator-separator {
+    display: none;
+  }
+
+  .Select__menu {
+    width: 60px;
+  }
+
+  .Select__option {
+    transition: ${({ theme }) => theme.transition('background-color')},
+      ${({ theme }) => theme.transition('color')};
+  }
+
+  .Select__option:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.color.white};
+    background-color: ${({ theme }) => theme.color.secondary};
+  }
+
+  .Select__option--is-selected {
+    background-color: ${({ theme }) => theme.color.secondary};
+  }
+`;
+
+export const Price = styled.section`
+  margin-top: 1rem;
+  font-weight: ${({ theme }) => theme.font.weight.bold};
+  font-size: ${({ theme }) => theme.font.size.sm};
 `;

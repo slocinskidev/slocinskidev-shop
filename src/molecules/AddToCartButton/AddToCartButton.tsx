@@ -9,7 +9,13 @@ import { ContextType } from 'providers/model';
 
 import { StyledRightArrow } from './AddToCartButton.styles';
 
-const AddToCartButton = ({ product }: { product: CommonTypes.ProductType }) => {
+const AddToCartButton = ({
+  product,
+  className,
+}: {
+  product: CommonTypes.ProductType;
+  className?: string;
+}) => {
   const { setCart } = useContext(CartContext) as ContextType;
 
   const handleAddToCartClick = () => {
@@ -30,15 +36,14 @@ const AddToCartButton = ({ product }: { product: CommonTypes.ProductType }) => {
   };
 
   return (
-    <>
-      <Button
-        onClick={handleAddToCartClick}
-        variant={BUTTON.VARIANT.CONTAINED}
-        icon={<StyledRightArrow />}
-      >
-        Dodaj do koszyka
-      </Button>
-    </>
+    <Button
+      className={className}
+      onClick={handleAddToCartClick}
+      variant={BUTTON.VARIANT.CONTAINED}
+      icon={<StyledRightArrow />}
+    >
+      Dodaj do koszyka
+    </Button>
   );
 };
 

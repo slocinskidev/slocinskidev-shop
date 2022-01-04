@@ -4,18 +4,29 @@ import { CartContext } from 'providers/CartProvider';
 
 import { ContextType } from 'providers/model';
 
-// import { Wrapper } from './PriceDetails.styles';
+import { Details, Heading, StyledButton, Summary, Wrapper } from './PriceDetails.styles';
+import { BUTTON } from 'atoms/Button';
+import { StyledRightArrow } from 'molecules/AddToCartButton/AddToCartButton.styles';
 
 const PriceDetails = () => {
   const { cart } = useContext(CartContext) as ContextType;
-  //TODO: add summary price when delivery cost will be
+
   return (
-    <div>
-      <h3>Do zapłaty</h3>
-      <h4>Ilość produktów: {cart.totalProductsCount}</h4>
-      <h4>Przesyłka: ...</h4>
-      <h4>Do zapłaty: {cart.totalProductsPrice} zł</h4>
-    </div>
+    <Wrapper>
+      <Heading>Podsumowanie</Heading>
+      <Details>
+        Ilość produktów: <span>{cart.totalProductsCount}</span>
+      </Details>
+      <Details>
+        Wartość produktów: <span>{cart.totalProductsPrice.toFixed(2)} zł</span>
+      </Details>
+      <Summary>
+        Do zapłaty: <span>{cart.totalProductsPrice.toFixed(2)} zł</span>
+      </Summary>
+      <StyledButton variant={BUTTON.VARIANT.CONTAINED} icon={<StyledRightArrow />}>
+        Przejdź do kasy
+      </StyledButton>
+    </Wrapper>
   );
 };
 

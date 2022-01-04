@@ -4,7 +4,8 @@ import breakpoint from 'utils/breakpoints';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const StyledGatsbyImage = styled(GatsbyImage)`
-  height: 400px;
+  height: 100vh;
+  max-height: 700px;
 `;
 
 export const Wrapper = styled.div`

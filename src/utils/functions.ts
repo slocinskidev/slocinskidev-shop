@@ -13,13 +13,15 @@ export const createNewProduct = (
   productPrice: number,
   qty: number,
 ): CommonTypes.CartProductType => {
+  const { id, image, name, shortDescription } = product;
+
   return {
-    id: product.id,
-    image: product.image,
-    name: product.name,
-    shortDescription: product.shortDescription,
+    id,
+    image,
+    name,
+    shortDescription,
     price: productPrice,
-    qty: qty,
+    qty,
     totalPrice: parseFloat((productPrice * qty).toFixed(2)),
   };
 };
@@ -86,6 +88,8 @@ export const updateCart = (
   qtyToBeAdded: number | boolean,
   newQty: number | boolean = false,
 ) => {
+  const { id, image, name, shortDescription } = product;
+
   const updatedProducts = getUpdatedProducts(existingCart.products, product, qtyToBeAdded, newQty);
   const addPrice = (total: CommonTypes.CartProductType, item: CommonTypes.CartProductType) => {
     total.totalPrice += item.totalPrice;
@@ -95,10 +99,10 @@ export const updateCart = (
   };
 
   const total = updatedProducts.reduce(addPrice, {
-    id: product.id,
-    image: product.image,
-    name: product.name,
-    shortDescription: product.shortDescription,
+    id,
+    image,
+    name,
+    shortDescription,
     price: 0,
     qty: 0,
     totalPrice: 0,

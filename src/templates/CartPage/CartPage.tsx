@@ -8,7 +8,7 @@ import { CartContext } from 'providers/CartProvider';
 import { ContextType } from 'providers/model';
 import { CartPageNodesType } from './model';
 
-import { Wrapper, StyledPageTitle } from './CartPage.styles';
+import { Wrapper } from './CartPage.styles';
 
 const ProductsPage = ({
   data: {
@@ -22,17 +22,12 @@ const ProductsPage = ({
   const IS_PRODUCT_IN_CART = cart.totalProductsCount > 0;
 
   const renderCartView = IS_PRODUCT_IN_CART ? (
-    <CartProducts />
+    <CartProducts cartHeading={title} />
   ) : (
     <CartInfo cartInfo={cartInfo} />
   );
 
-  return (
-    <Wrapper>
-      <StyledPageTitle>{title}</StyledPageTitle>
-      {renderCartView}
-    </Wrapper>
-  );
+  return <Wrapper>{renderCartView}</Wrapper>;
 };
 
 export const query = graphql`

@@ -8,9 +8,9 @@ import { removeItemsFromCart } from 'utils/functions';
 
 import { ContextType } from 'providers/model';
 
-import { Wrapper } from './CartProducts.styles';
+import { BasketSection, StyledPageTitle, Wrapper } from './CartProducts.styles';
 
-const CartProducts = () => {
+const CartProducts = ({ cartHeading }: { cartHeading: string }) => {
   const { cart, setCart } = useContext(CartContext) as ContextType;
 
   const removeProductFromCart = (
@@ -39,7 +39,10 @@ const CartProducts = () => {
 
   return (
     <Wrapper>
-      <ul>{renderCartItems}</ul>
+      <BasketSection>
+        <StyledPageTitle>{cartHeading}</StyledPageTitle>
+        <ul>{renderCartItems}</ul>
+      </BasketSection>
       <PriceDetails />
     </Wrapper>
   );

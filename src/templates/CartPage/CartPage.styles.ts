@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import PageTitle from 'atoms/PageTitle';
+import breakpoint from 'utils/breakpoints';
 
 export const Wrapper = styled.section`
   margin: 4rem 0 10rem;
-  padding: ${({ theme }) => theme.variable.paddingWrapper};
-`;
+  background-color: ${({ theme }) => theme.color.gray6};
 
-export const StyledPageTitle = styled(PageTitle)`
-  margin-bottom: 4rem;
+  @media ${breakpoint.device.sm} {
+    padding: ${({ theme }) => theme.variable.paddingWrapper};
+  }
 `;

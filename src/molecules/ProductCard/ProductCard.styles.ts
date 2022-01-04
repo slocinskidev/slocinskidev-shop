@@ -31,7 +31,7 @@ export const RegularPrice = styled.section`
 `;
 
 export const StyledGatsbyImage = styled(GatsbyImage)`
-  height: 400px;
+  aspect-ratio: 2 / 3;
 `;
 
 export const ShortDescription = styled.section`

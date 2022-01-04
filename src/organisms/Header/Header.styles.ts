@@ -38,3 +38,11 @@ export const StyledDesktopLogo = styled(Logo)`
     width: 280px;
   }
 `;
+
+export const CartButton = styled(Button)`
+  &:hover {
+    ${StyledBadge} {
+      background-color: ${({ theme }) => theme.color.secondary};
+    }
+  }
+`;
