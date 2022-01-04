@@ -72,11 +72,11 @@ export const CategoriesList = styled.ul`
   margin-bottom: 1rem;
 `;
 
-export const StyledButton = styled(Button)`
+export const CategoryButton = styled(Button)`
   font-size: ${({ theme }) => theme.font.size.xxs};
   padding: 0.5rem 1rem;
 `;
 
 export const StyledAccordion = styled(Accordion)`
-  margin-top: 6rem;
+  margin-bottom: 2rem;
 `;

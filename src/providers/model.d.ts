@@ -1,4 +1,4 @@
 export type ContextType = {
-  cart: CartProductType;
+  cart: CommonTypes.CartType;
   setCart: React.Dispatch<React.SetStateAction<{} | CommonTypes.CartType>>;
 };

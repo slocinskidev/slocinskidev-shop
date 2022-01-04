@@ -26,7 +26,8 @@ declare namespace CommonTypes {
     };
     price: string;
     galleryImages: { nodes: ImageType[] };
-    regularPrice?: string;
+    regularPrice: string;
+    onSale: boolean;
   };
 
   type CartInfoType = {

@@ -27,18 +27,21 @@ export const ProductFragment = graphql`
       name
       price
       regularPrice
+      onSale
     }
     ... on WpVariableProduct {
       id
       name
       price
       regularPrice
+      onSale
     }
     ... on WpExternalProduct {
       id
       name
       price
       regularPrice
+      onSale
       externalUrl
     }
     ... on WpGroupProduct {
@@ -51,6 +54,7 @@ export const ProductFragment = graphql`
             name
             price
             regularPrice
+            onSale
           }
         }
       }

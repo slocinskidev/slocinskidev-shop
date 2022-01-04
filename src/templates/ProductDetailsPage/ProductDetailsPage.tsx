@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Button, { BUTTON } from 'atoms/Button';
+import { BUTTON } from 'atoms/Button';
 import ProductGallery from 'molecules/ProductGallery';
 import AddToCartButton from 'molecules/AddToCartButton';
 import { STRING } from 'utils/constants';
@@ -13,7 +13,7 @@ import {
   Price,
   PriceSection,
   RegularPrice,
-  StyledButton,
+  CategoryButton,
   Wrapper,
   DetailsWrapper,
   StyledAccordion,
@@ -34,14 +34,13 @@ const ProductDetailsPage = ({
     galleryImages,
     price,
     regularPrice,
+    onSale,
     productCategories,
   } = product;
 
   const renderPrice = price ? (
     <PriceSection>
-      {regularPrice && (
-        <RegularPrice dangerouslySetInnerHTML={{ __html: regularPrice }} />
-      )}
+      {onSale ? <RegularPrice dangerouslySetInnerHTML={{ __html: regularPrice }} /> : null}
       <Price dangerouslySetInnerHTML={{ __html: price }} />
     </PriceSection>
   ) : null;
@@ -50,12 +49,12 @@ const ProductDetailsPage = ({
     <CategoriesList>
       {productCategories.nodes?.map(({ id, name }) => (
         <li key={id}>
-          <StyledButton
+          <CategoryButton
             variant={BUTTON.VARIANT.CONTAINED}
             link={`/${STRING.CATEGORY}/${name.toLocaleLowerCase()}`}
           >
             {name}
-          </StyledButton>
+          </CategoryButton>
         </li>
       ))}
     </CategoriesList>
@@ -69,12 +68,11 @@ const ProductDetailsPage = ({
       <DetailsWrapper>
         <ProductName>{name}</ProductName>
         {renderCategories}
-        <ShortDescription
-          dangerouslySetInnerHTML={{ __html: shortDescription }}
-        />
+        <ShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
         {renderPrice}
         {renderButton}
-        <StyledAccordion title="Opis" content={description} isAccordionOpen />
+        <StyledAccordion title="Opis" content={description} isAccordionOpen={false} />
+        <StyledAccordion title="Szczegóły" content={description} isAccordionOpen={false} />
       </DetailsWrapper>
     </Wrapper>
   );

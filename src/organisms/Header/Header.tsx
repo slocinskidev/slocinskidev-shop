@@ -36,11 +36,7 @@ const Header = ({
         <Hamburger isActive={isActive} setIsActive={setIsActive} />
         <StyledLogo variant={LOGO.VARIANT.SECONDARY} link={ROOT_PATH} />
         <StyledDesktopLogo variant={LOGO.VARIANT.PRIMARY} link={ROOT_PATH} />
-        <Navigation
-          isActive={isActive}
-          setIsActive={setIsActive}
-          navigation={navigation}
-        />
+        <Navigation isActive={isActive} setIsActive={setIsActive} navigation={navigation} />
         <Button icon={<CartIcon />} link="/cart/" />
       </Wrapper>
       {renderPromoInfo}

@@ -12,18 +12,12 @@ const CartProvider = ({ children }: { children?: React.ReactNode }) => {
 
     const storageCartData = localStorage.getItem('woo-shop-cart');
 
-    const cartData: CommonTypes.CartType | {} = storageCartData
-      ? JSON.parse(storageCartData)
-      : {};
+    const cartData: CommonTypes.CartType | {} = storageCartData ? JSON.parse(storageCartData) : {};
 
     setCart(cartData);
   }, []);
 
-  return (
-    <CartContext.Provider value={{ cart, setCart }}>
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={{ cart, setCart }}>{children}</CartContext.Provider>;
 };
 
 export default CartProvider;

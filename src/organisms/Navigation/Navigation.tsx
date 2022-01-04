@@ -8,11 +8,7 @@ import { Wrapper, NavList, NavItem } from './Navigation.styles';
 const Navigation = ({ isActive, setIsActive, navigation }: NavigationProps) => {
   const renderNavigationItems = navigation?.map(({ label, path }) => (
     <NavItem key={label}>
-      <Link
-        to={path}
-        activeClassName="active"
-        onClick={() => setIsActive((prevState) => !prevState)}
-      >
+      <Link to={path} activeClassName="active" onClick={() => setIsActive(false)}>
         {label}
       </Link>
     </NavItem>

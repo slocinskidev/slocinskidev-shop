@@ -9,6 +9,7 @@ import {
   ProductName,
   RegularPrice,
   StyledGatsbyImage,
+  ShortDescription,
 } from './ProductCard.styles';
 
 const ProductCard = ({ product }: { product: CommonTypes.ProductType }) => {
@@ -17,23 +18,21 @@ const ProductCard = ({ product }: { product: CommonTypes.ProductType }) => {
   const {
     image: { localFile, altText },
     name,
+    shortDescription,
     price,
     regularPrice,
+    onSale,
     link,
   } = product;
 
   const gatsbyImage = getImage(localFile);
 
-  const renderImage = gatsbyImage ? (
-    <StyledGatsbyImage image={gatsbyImage} alt={altText} />
-  ) : null;
+  const renderImage = gatsbyImage ? <StyledGatsbyImage image={gatsbyImage} alt={altText} /> : null;
 
   const renderPrice = price ? (
     <PriceSection>
+      {onSale ? <RegularPrice dangerouslySetInnerHTML={{ __html: regularPrice }} /> : null}
       <Price dangerouslySetInnerHTML={{ __html: price }} />
-      {regularPrice && (
-        <RegularPrice dangerouslySetInnerHTML={{ __html: regularPrice }} />
-      )}
     </PriceSection>
   ) : null;
 
@@ -42,6 +41,7 @@ const ProductCard = ({ product }: { product: CommonTypes.ProductType }) => {
       <Link to={link}>
         {renderImage}
         <ProductName>{name}</ProductName>
+        <ShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
       </Link>
       {renderPrice}
     </Wrapper>
