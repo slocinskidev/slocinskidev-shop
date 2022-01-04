@@ -6,6 +6,7 @@ export const StyledBadge = styled(Badge)`
   position: absolute;
   bottom: 5px;
   right: 5px;
+  transition: ${({ theme }) => theme.transition('background-color')};
 
   span {
     font-size: 1.2rem;
@@ -16,4 +17,5 @@ export const StyledBasket = styled(Basket)`
   position: relative;
   width: 40px;
   height: 40px;
+  transition: ${({ theme }) => theme.transition('color')};
 `;

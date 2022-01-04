@@ -3,6 +3,7 @@ import Button from 'atoms/Button';
 import breakpoint from 'utils/breakpoints';
 import Accordion from 'molecules/Accordion';
 import RightArrow from 'atoms/SVG/RightArrow';
+import AddToCartButton from 'molecules/AddToCartButton';
 
 export const StyledRightArrow = styled(RightArrow)`
   margin-left: 1rem;
@@ -29,11 +30,10 @@ export const DetailsWrapper = styled.div`
   padding: ${({ theme }) => theme.variable.paddingWrapper};
   display: grid;
   justify-items: start;
-  justify-content: center;
-  align-content: center;
+  place-content: center;
 
   @media ${breakpoint.device.md} {
-    justify-content: start;
+    place-content: start;
   }
 `;
 
@@ -77,6 +77,6 @@ export const CategoryButton = styled(Button)`
   padding: 0.5rem 1rem;
 `;
 
-export const StyledAccordion = styled(Accordion)`
-  margin-bottom: 2rem;
+export const StyledAddToCartButton = styled(AddToCartButton)`
+  margin-bottom: 6rem;
 `;

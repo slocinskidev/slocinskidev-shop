@@ -67,4 +67,6 @@ declare namespace CommonTypes {
     totalProductsCount: number;
     totalProductsPrice: number;
   };
+
+  type SelectQuantityType = { label: string; value: number };
 }

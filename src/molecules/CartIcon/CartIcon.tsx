@@ -8,7 +8,7 @@ import { StyledBadge, StyledBasket } from './CartIcon.styles';
 const CartIcon = () => {
   const { cart } = useContext(CartContext) as ContextType;
 
-  const totalProductsCount: number =
+  const totalProductsCount: number | null =
     cart && Object.keys(cart).length ? cart.totalProductsCount : null;
 
   const renderBadge = totalProductsCount ? (
