@@ -6,6 +6,11 @@ export const Wrapper = styled.section`
   display: grid;
   gap: 2rem;
   align-items: start;
+  background-color: ${({ theme }) => theme.color.gray6};
+
+  @media ${breakpoint.device.sm} {
+    padding: ${({ theme }) => theme.variable.paddingWrapper};
+  }
 
   @media ${breakpoint.device.lg} {
     grid-template-columns: 1fr minmax(300px, 400px);

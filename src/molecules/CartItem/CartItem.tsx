@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { getImage } from 'gatsby-plugin-image';
-
-import { updateCart } from 'utils/functions';
 
 import { CartItemProps } from './model';
 
@@ -15,39 +12,51 @@ import {
   Wrapper,
   Price,
 } from './CartItem.styles';
+import { useLazyQuery, useMutation } from '@apollo/client';
+import UPDATE_CART from 'mutations/update-cart';
 
-const CartItem = ({ product, setCart, removeProductFromCart }: CartItemProps) => {
+const CartItem = ({ product, removeProductFromCart, refetch }: CartItemProps) => {
   if (!product) return null;
 
   const {
-    id,
-    image: { localFile, altText },
-    name,
-    shortDescription,
-    qty,
-    totalPrice,
+    key,
+    product: {
+      node: { name, shortDescription },
+    },
+    quantity,
+    total,
   } = product;
 
-  const [productCount, setProductCount] = useState<number>(qty);
+  const [updateCart, { loading: updateCartProcessing }] = useMutation(UPDATE_CART, {
+    onCompleted: () => {
+      refetch();
+    },
+    onError: (error) => {
+      if (error) {
+        console.log(error);
+      }
+    },
+  });
 
-  const gatsbyImage = getImage(localFile);
+  const [productCount, setProductCount] = useState<number>(quantity);
 
-  const renderImage = gatsbyImage ? <StyledGatsbyImage image={gatsbyImage} alt={altText} /> : null;
+  // const gatsbyImage = getImage(localFile);
 
-  const changeProductQuantity = (option: CommonTypes.SelectQuantityType | null) => {
+  // const renderImage = gatsbyImage ? <StyledGatsbyImage image={gatsbyImage} alt={altText} /> : null;
+
+  const changeProductQuantity = (option: CommonTypes.SelectQuantityType | null, key: string) => {
     if (!option) return;
 
     const newQty = option.value;
-    setProductCount(+newQty);
+    setProductCount(newQty);
 
-    const localCart = localStorage.getItem('woo-shop-cart');
-
-    if (localCart) {
-      const existingCart = JSON.parse(localCart);
-      const updatedCart = updateCart(existingCart, product, false, Number(newQty));
-
-      setCart(updatedCart);
-    }
+    updateCart({
+      variables: {
+        input: {
+          items: [{ key, quantity: newQty }],
+        },
+      },
+    });
   };
 
   const options = [
@@ -60,7 +69,7 @@ const CartItem = ({ product, setCart, removeProductFromCart }: CartItemProps) =>
 
   return (
     <Wrapper>
-      {renderImage}
+      {/* {renderImage} */}
       <Content>
         <ProductName>{name}</ProductName>
         <ShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
@@ -68,11 +77,13 @@ const CartItem = ({ product, setCart, removeProductFromCart }: CartItemProps) =>
           classNamePrefix="Select"
           options={options}
           value={options[productCount - 1]}
-          onChange={(option) => changeProductQuantity(option as CommonTypes.SelectQuantityType)}
+          onChange={(option) =>
+            changeProductQuantity(option as CommonTypes.SelectQuantityType, key)
+          }
         />
-        <Price>{totalPrice.toFixed(2)} zł</Price>
+        <Price dangerouslySetInnerHTML={{ __html: total }} />
       </Content>
-      <DeleteButton onClick={(e) => removeProductFromCart(e, id)} />
+      <DeleteButton onClick={(e) => removeProductFromCart(e, key)} />
     </Wrapper>
   );
 };

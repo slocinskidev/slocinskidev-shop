@@ -2,10 +2,9 @@ import { graphql } from 'gatsby';
 
 export const ProductFragment = graphql`
   fragment ProductFragment on WpProduct {
-    id
     link
     description
-    databaseId
+    productId: databaseId
     nodeType
     shortDescription
     galleryImages {
@@ -23,21 +22,21 @@ export const ProductFragment = graphql`
       }
     }
     ... on WpSimpleProduct {
-      id
+      productId: databaseId
       name
       price
       regularPrice
       onSale
     }
     ... on WpVariableProduct {
-      id
+      productId: databaseId
       name
       price
       regularPrice
       onSale
     }
     ... on WpExternalProduct {
-      id
+      productId: databaseId
       name
       price
       regularPrice
@@ -50,7 +49,7 @@ export const ProductFragment = graphql`
       products {
         nodes {
           ... on WpSimpleProduct {
-            id
+            productId: databaseId
             name
             price
             regularPrice

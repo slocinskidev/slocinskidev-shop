@@ -17,17 +17,11 @@ const ProductsPage = ({
 }: {
   data: CartPageNodesType;
 }) => {
-  const { cart } = useContext(CartContext) as ContextType;
-
-  const IS_PRODUCT_IN_CART = cart.totalProductsCount > 0;
-
-  const renderCartView = IS_PRODUCT_IN_CART ? (
-    <CartProducts cartHeading={title} />
-  ) : (
-    <CartInfo cartInfo={cartInfo} />
+  return (
+    <Wrapper>
+      <CartProducts cartHeading={title} cartInfo={cartInfo} />
+    </Wrapper>
   );
-
-  return <Wrapper>{renderCartView}</Wrapper>;
 };
 
 export const query = graphql`

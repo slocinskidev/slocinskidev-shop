@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 
 import Button, { BUTTON } from 'atoms/Button';
 import { CartContext } from 'providers/CartProvider';
-import { isBrowser } from 'utils/isBrowser';
-import { addFirstProduct, updateCart } from 'utils/functions';
-
-import { ContextType } from 'providers/model';
 
 import { StyledRightArrow } from './AddToCartButton.styles';
+import ADD_TO_CART from 'mutations/add-to-cart';
+import { useMutation } from '@apollo/client';
+import { v4 } from 'uuid';
 
 const AddToCartButton = ({
   product,
@@ -16,33 +15,45 @@ const AddToCartButton = ({
   product: CommonTypes.ProductType;
   className?: string;
 }) => {
-  const { setCart } = useContext(CartContext) as ContextType;
+  const { setCart } = useContext(CartContext);
 
-  const handleAddToCartClick = () => {
-    if (!isBrowser) return;
-
-    const storageCart = localStorage.getItem('woo-shop-cart');
-
-    if (storageCart) {
-      const existingCart: CommonTypes.CartType = JSON.parse(storageCart);
-      const qtyToBeAdded = 1;
-
-      const updatedCart = updateCart(existingCart, product, qtyToBeAdded);
-      setCart(updatedCart);
-    } else {
-      const newCart = addFirstProduct(product);
-      setCart(newCart);
-    }
+  const productQtyInput = {
+    clientMutationId: v4(),
+    productId: product?.productId,
   };
+
+  const [addToCart, { loading }] = useMutation(ADD_TO_CART, {
+    onCompleted: ({ addToCart: { cart } }: { addToCart: { cart: CommonTypes.CartType } }) => {
+      console.log({
+        title: 'Added to cart',
+        status: 'success',
+      });
+
+      setCart(cart);
+    },
+    onError: () => {
+      console.log({
+        title: 'Error',
+        description: 'There was an error adding your product',
+        status: 'error',
+      });
+    },
+  });
+
+  function handleAddToCart() {
+    addToCart({
+      variables: { input: productQtyInput },
+    });
+  }
 
   return (
     <Button
       className={className}
-      onClick={handleAddToCartClick}
+      onClick={handleAddToCart}
       variant={BUTTON.VARIANT.CONTAINED}
       icon={<StyledRightArrow />}
     >
-      Dodaj do koszyka
+      {loading ? 'Trwa dodawanie...' : 'Dodaj do koszyka'}
     </Button>
   );
 };

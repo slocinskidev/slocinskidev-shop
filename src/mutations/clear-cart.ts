@@ -1,13 +1,32 @@
 import { gql } from '@apollo/client';
 
-const CLEAR_CART_MUTATION = gql`
-  mutation CLEAR_CART_MUTATION($input: RemoveItemsFromCartInput!) {
+const REMOVE_ITEM_FROM_CART = gql`
+  mutation RemoveItemFromCart($input: RemoveItemsFromCartInput!) {
     removeItemsFromCart(input: $input) {
-      cartItems {
-        quantity
+      cart {
+        subtotal
+        total
+        shippingTotal
+        contents {
+          itemCount
+          nodes {
+            quantity
+            key
+            product {
+              node {
+                name
+                sku
+                databaseId
+                ... on SimpleProduct {
+                  price
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 `;
 
-export default CLEAR_CART_MUTATION;
+export default REMOVE_ITEM_FROM_CART;

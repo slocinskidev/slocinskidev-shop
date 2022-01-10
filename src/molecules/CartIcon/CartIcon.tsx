@@ -9,7 +9,7 @@ const CartIcon = () => {
   const { cart } = useContext(CartContext) as ContextType;
 
   const totalProductsCount: number | null =
-    cart && Object.keys(cart).length ? cart.totalProductsCount : null;
+    cart && Object.keys(cart).length ? cart.contents.itemCount : null;
 
   const renderBadge = totalProductsCount ? (
     <StyledBadge>

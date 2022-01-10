@@ -1,5 +1,9 @@
 export interface CartItemProps {
   product: CommonTypes.CartProductType;
-  setCart: React.Dispatch<React.SetStateAction<{} | CartProductType>>;
-  removeProductFromCart: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => void;
+  removeProductFromCart: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, key: string) => void;
+  refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<
+    ApolloQueryResult<{
+      cart: CommonTypes.CartType;
+    }>
+  >;
 }
