@@ -15,7 +15,7 @@ declare namespace CommonTypes {
   }
 
   type ProductType = {
-    id: string;
+    productId: number;
     link: string;
     description: string;
     shortDescription: string;
@@ -52,20 +52,38 @@ declare namespace CommonTypes {
     button: ButtonType;
   };
 
+  type MediaItem = {
+    srcSet: string;
+    sizes: string;
+    sourceUrl: string;
+    altText: string;
+  };
+
   type CartProductType = {
-    id: string;
-    image: CommonTypes.ImageType;
-    name: string;
-    shortDescription: string;
-    price: number;
-    qty: number;
-    totalPrice: number;
+    key: string;
+    quantity: number;
+    total: string;
+    product: {
+      node: {
+        name?: string;
+        image: MediaItem;
+        shortDescription: string;
+        databaseId: number;
+        sku: string;
+        price: string;
+        stockQuantity: number | null;
+      };
+    };
   };
 
   type CartType = {
-    products: CommonTypes.CartProductType[];
-    totalProductsCount: number;
-    totalProductsPrice: number;
+    subtotal?: string;
+    total?: string;
+    shippingTotal?: string;
+    contents: {
+      itemCount: number;
+      nodes: CartProductType[];
+    };
   };
 
   type SelectQuantityType = { label: string; value: number };

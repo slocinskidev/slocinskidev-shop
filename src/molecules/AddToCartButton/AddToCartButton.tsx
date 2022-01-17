@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { isApolloError, useMutation } from '@apollo/client';
 
 import Button, { BUTTON } from 'atoms/Button';
-import { CartContext } from 'providers/CartProvider';
-import { isBrowser } from 'utils/isBrowser';
-import { addFirstProduct, updateCart } from 'utils/functions';
 
-import { ContextType } from 'providers/model';
+import ADD_TO_CART from 'mutations/add-to-cart';
 
 import { StyledRightArrow } from './AddToCartButton.styles';
 
@@ -16,33 +14,33 @@ const AddToCartButton = ({
   product: CommonTypes.ProductType;
   className?: string;
 }) => {
-  const { setCart } = useContext(CartContext) as ContextType;
+  const [addToCart, { loading }] = useMutation(ADD_TO_CART, {
+    refetchQueries: ['Cart'],
+    awaitRefetchQueries: true,
+  });
 
-  const handleAddToCartClick = () => {
-    if (!isBrowser) return;
-
-    const storageCart = localStorage.getItem('woo-shop-cart');
-
-    if (storageCart) {
-      const existingCart: CommonTypes.CartType = JSON.parse(storageCart);
-      const qtyToBeAdded = 1;
-
-      const updatedCart = updateCart(existingCart, product, qtyToBeAdded);
-      setCart(updatedCart);
-    } else {
-      const newCart = addFirstProduct(product);
-      setCart(newCart);
+  const handleAddToCart = async () => {
+    try {
+      await addToCart({
+        variables: {
+          productId: product.productId,
+        },
+      });
+    } catch (error) {
+      if (error instanceof Error && isApolloError(error)) {
+        console.error(error.message, { severity: 'error' });
+      }
     }
   };
 
   return (
     <Button
       className={className}
-      onClick={handleAddToCartClick}
+      onClick={handleAddToCart}
       variant={BUTTON.VARIANT.CONTAINED}
       icon={<StyledRightArrow />}
     >
-      Dodaj do koszyka
+      {loading ? 'Trwa dodawanie...' : 'Dodaj do koszyka'}
     </Button>
   );
 };

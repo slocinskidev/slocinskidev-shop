@@ -1,99 +1,73 @@
 import { gql } from '@apollo/client';
 
 const GET_CART = gql`
-  query GetCart {
-    cart {
-      contents {
+  query Cart {
+    cart(recalculateTotals: true) {
+      contents(first: 50) {
+        itemCount
         nodes {
           key
           product {
             node {
               id
+              slug
               databaseId
               name
-              description
-              type
-              onSale
-              slug
-              averageRating
-              reviewCount
+              shortDescription
+              sku
               image {
-                id
-                sourceUrl
-                srcSet
                 altText
-                title
+                sizes(size: SHOP_CATALOG)
+                sourceUrl(size: SHOP_CATALOG)
+                srcSet(size: SHOP_CATALOG)
               }
-              galleryImages {
-                nodes {
-                  id
-                  sourceUrl
-                  srcSet
-                  altText
-                  title
-                }
+              ... on SimpleProduct {
+                price
+                stockQuantity
+                stockStatus
+              }
+              ... on VariableProduct {
+                price
+                stockQuantity
+                stockStatus
               }
             }
           }
           variation {
             node {
-              id
-              databaseId
-              name
-              description
-              type
-              onSale
-              price
-              regularPrice
-              salePrice
-              image {
-                id
-                sourceUrl
-                srcSet
-                altText
-                title
+              stockQuantity
+              stockStatus
+              attributes {
+                nodes {
+                  id
+                  name
+                  value
+                }
               }
-            }
-            attributes {
-              id
-              name
-              value
             }
           }
           quantity
-          total
           subtotal
-          subtotalTax
+          total
         }
       }
-      appliedCoupons {
-        nodes {
+      availableShippingMethods {
+        packageDetails
+        rates {
           id
-          discountType
-          amount
-          dateExpiry
-          products {
-            nodes {
-              id
-            }
-          }
-          productCategories {
-            nodes {
-              id
-            }
-          }
+          cost
+          label
         }
       }
-      subtotal
-      subtotalTax
-      shippingTax
-      shippingTotal
-      total
-      totalTax
-      feeTax
-      feeTotal
-      discountTax
+      chosenShippingMethods
+      appliedCoupons {
+        code
+        discountAmount
+      }
       discountTotal
+      shippingTotal
+      subtotal
+      total
     }
   }
 `;

@@ -1,23 +1,27 @@
 import Button from 'atoms/Button';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import Select, { SingleValue } from 'react-select';
-import styled from 'styled-components';
-import { theme } from 'styles/mainTheme';
+import Select from 'react-select';
+import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.li`
+export const Wrapper = styled.li<{ loading: boolean }>`
   display: grid;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray6};
   padding-bottom: 2rem;
   margin-bottom: 2rem;
   grid-template-columns: auto 2fr min-content;
-  /* align-items: start; */
   gap: 2rem;
+
+  ${({ loading }) =>
+    loading &&
+    css`
+      opacity: 0.4;
+    `}
 `;
 
-export const StyledGatsbyImage = styled(GatsbyImage)`
+export const StyledImage = styled.img`
   min-width: 75px;
   max-width: 150px;
   aspect-ratio: 2 / 3;
+  object-fit: cover;
   justify-self: center;
 `;
 

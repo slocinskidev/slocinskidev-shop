@@ -1,41 +1,55 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 
+import Loader from 'atoms/Loader';
 import CartItem from 'molecules/CartItem';
 import PriceDetails from 'molecules/PriceDetails';
-import { CartContext } from 'providers/CartProvider';
-import { isBrowser } from 'utils/isBrowser';
-import { removeItemsFromCart } from 'utils/functions';
+import CartInfo from 'molecules/CartInfo';
 
-import { ContextType } from 'providers/model';
+import GET_CART from 'queries/get-cart';
+import UPDATE_CART from 'mutations/update-cart';
 
-import { BasketSection, StyledPageTitle, Wrapper } from './CartProducts.styles';
+import { BasketSection, LoaderWrapper, StyledPageTitle, Wrapper } from './CartProducts.styles';
 
-const CartProducts = ({ cartHeading }: { cartHeading: string }) => {
-  const { cart, setCart } = useContext(CartContext) as ContextType;
+const CartProducts = ({
+  cartHeading,
+  cartInfo,
+}: {
+  cartHeading: string;
+  cartInfo: CommonTypes.CartInfoType;
+}) => {
+  const { data: { cart } = { cart: undefined }, loading } = useQuery(GET_CART, {
+    fetchPolicy: 'no-cache',
+    ssr: false,
+  });
 
-  const removeProductFromCart = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: string,
-  ) => {
-    if (!isBrowser) return null;
-    const updatedCart = removeItemsFromCart(id);
+  const [updateCart, { loading: updating }] = useMutation(UPDATE_CART, {
+    refetchQueries: ['Cart'],
+    awaitRefetchQueries: true,
+  });
 
-    if (!updatedCart) return null;
+  if (loading) {
+    return (
+      <LoaderWrapper>
+        <Loader />
+      </LoaderWrapper>
+    );
+  }
 
-    setCart(updatedCart);
-  };
+  if (cart && cart.contents.itemCount === 0) {
+    return <CartInfo cartInfo={cartInfo} />;
+  }
 
   const renderCartItems =
-    cart.products.length > 0
-      ? cart.products?.map((product: CommonTypes.CartProductType) => (
-          <CartItem
-            key={product.id}
-            product={product}
-            setCart={setCart}
-            removeProductFromCart={removeProductFromCart}
-          />
-        ))
-      : null;
+    cart &&
+    cart?.contents.nodes?.map((product: CommonTypes.CartProductType) => (
+      <CartItem
+        key={product.key}
+        product={product}
+        loading={updating}
+        onUpdate={(values) => updateCart({ variables: values })}
+      />
+    ));
 
   return (
     <Wrapper>
@@ -43,7 +57,7 @@ const CartProducts = ({ cartHeading }: { cartHeading: string }) => {
         <StyledPageTitle>{cartHeading}</StyledPageTitle>
         <ul>{renderCartItems}</ul>
       </BasketSection>
-      <PriceDetails />
+      <PriceDetails cart={cart} />
     </Wrapper>
   );
 };

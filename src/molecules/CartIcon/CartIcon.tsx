@@ -1,15 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/client';
 
-import { CartContext } from 'providers/CartProvider';
-import { ContextType } from 'providers/model';
+import GET_CART from 'queries/get-cart';
 
 import { StyledBadge, StyledBasket } from './CartIcon.styles';
 
 const CartIcon = () => {
-  const { cart } = useContext(CartContext) as ContextType;
+  const { data: { cart } = { cart: undefined } } = useQuery(GET_CART, {
+    fetchPolicy: 'no-cache',
+    ssr: false,
+  });
 
   const totalProductsCount: number | null =
-    cart && Object.keys(cart).length ? cart.totalProductsCount : null;
+    cart && Object.keys(cart).length ? cart.contents.itemCount : null;
 
   const renderBadge = totalProductsCount ? (
     <StyledBadge>

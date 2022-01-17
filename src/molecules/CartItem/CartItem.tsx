@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { getImage } from 'gatsby-plugin-image';
-
-import { updateCart } from 'utils/functions';
 
 import { CartItemProps } from './model';
 
@@ -11,56 +8,67 @@ import {
   ProductName,
   StyledSelect,
   ShortDescription,
-  StyledGatsbyImage,
+  StyledImage,
   Wrapper,
   Price,
 } from './CartItem.styles';
 
-const CartItem = ({ product, setCart, removeProductFromCart }: CartItemProps) => {
+const CartItem = ({ product, loading, onUpdate }: CartItemProps) => {
   if (!product) return null;
 
+  const DEFAULT_MAX_PRODUCT_QUANTITY = 10;
+
   const {
-    id,
-    image: { localFile, altText },
-    name,
-    shortDescription,
-    qty,
-    totalPrice,
+    key,
+    product: {
+      node: {
+        image: { srcSet, sizes, sourceUrl, altText },
+        name,
+        shortDescription,
+        stockQuantity,
+      },
+    },
+    quantity,
+    total,
   } = product;
 
-  const [productCount, setProductCount] = useState<number>(qty);
+  const [productCount, setProductCount] = useState<number>(quantity);
 
-  const gatsbyImage = getImage(localFile);
-
-  const renderImage = gatsbyImage ? <StyledGatsbyImage image={gatsbyImage} alt={altText} /> : null;
-
-  const changeProductQuantity = (option: CommonTypes.SelectQuantityType | null) => {
+  const changeProductQuantity = (option: CommonTypes.SelectQuantityType | null, key: string) => {
     if (!option) return;
 
     const newQty = option.value;
-    setProductCount(+newQty);
+    setProductCount(newQty);
 
-    const localCart = localStorage.getItem('woo-shop-cart');
-
-    if (localCart) {
-      const existingCart = JSON.parse(localCart);
-      const updatedCart = updateCart(existingCart, product, false, Number(newQty));
-
-      setCart(updatedCart);
-    }
+    onUpdate({ key, quantity: newQty });
   };
 
-  const options = [
-    { value: 1, label: '1' },
-    { value: 2, label: '2' },
-    { value: 3, label: '3' },
-    { value: 4, label: '4' },
-    { value: 5, label: '5' },
-  ];
+  const removeProduct = () => {
+    onUpdate({ key, quantity: 0 });
+  };
+
+  const createStockOptions = (stockQuantity: number | null = 5) => {
+    const checkStockQuantity = (qty: number | null): number => {
+      if (!qty) return DEFAULT_MAX_PRODUCT_QUANTITY;
+
+      if (qty > DEFAULT_MAX_PRODUCT_QUANTITY) return DEFAULT_MAX_PRODUCT_QUANTITY;
+
+      return qty;
+    };
+
+    const val = Array.from({ length: checkStockQuantity(stockQuantity) }, (_, k) => ({
+      value: k + 1,
+      label: `${k + 1}`,
+    }));
+
+    return val;
+  };
+
+  const options = createStockOptions(stockQuantity);
 
   return (
-    <Wrapper>
-      {renderImage}
+    <Wrapper loading={loading}>
+      <StyledImage srcSet={srcSet} sizes={sizes} src={sourceUrl} alt={altText} />
       <Content>
         <ProductName>{name}</ProductName>
         <ShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
@@ -68,11 +76,13 @@ const CartItem = ({ product, setCart, removeProductFromCart }: CartItemProps) =>
           classNamePrefix="Select"
           options={options}
           value={options[productCount - 1]}
-          onChange={(option) => changeProductQuantity(option as CommonTypes.SelectQuantityType)}
+          onChange={(option) =>
+            changeProductQuantity(option as CommonTypes.SelectQuantityType, key)
+          }
         />
-        <Price>{totalPrice.toFixed(2)} zł</Price>
+        <Price dangerouslySetInnerHTML={{ __html: total }} />
       </Content>
-      <DeleteButton onClick={(e) => removeProductFromCart(e, id)} />
+      <DeleteButton onClick={removeProduct} />
     </Wrapper>
   );
 };
