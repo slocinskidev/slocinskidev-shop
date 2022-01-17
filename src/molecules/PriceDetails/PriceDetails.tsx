@@ -8,9 +8,7 @@ import { Details, Heading, StyledButton, Summary, Wrapper } from './PriceDetails
 import { BUTTON } from 'atoms/Button';
 import { StyledRightArrow } from 'molecules/AddToCartButton/AddToCartButton.styles';
 
-const PriceDetails = () => {
-  const { cart } = useContext(CartContext) as ContextType;
-
+const PriceDetails = ({ cart }: { cart: CommonTypes.CartType }) => {
   return (
     <Wrapper>
       <Heading>Podsumowanie</Heading>

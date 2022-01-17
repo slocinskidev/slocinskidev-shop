@@ -1,8 +1,10 @@
 import { gql } from '@apollo/client';
 
 const UPDATE_CART = gql`
-  mutation UpdateCart($input: UpdateItemQuantitiesInput!) {
-    updateItemQuantities(input: $input) {
+  mutation UpdateCart($key: ID!, $quantity: Int!) {
+    updateItemQuantities(
+      input: { clientMutationId: "UpdateCart", items: [{ key: $key, quantity: $quantity }] }
+    ) {
       items {
         key
         quantity

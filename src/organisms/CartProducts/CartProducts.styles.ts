@@ -26,3 +26,8 @@ export const BasketSection = styled.div`
   border-radius: ${({ theme }) => theme.variable.borderRadiusCard};
   padding: 3rem 2rem;
 `;
+
+export const LoaderWrapper = styled.div`
+  display: grid;
+  place-items: center;
+`;

@@ -52,6 +52,13 @@ declare namespace CommonTypes {
     button: ButtonType;
   };
 
+  type MediaItem = {
+    srcSet: string;
+    sizes: string;
+    sourceUrl: string;
+    altText: string;
+  };
+
   type CartProductType = {
     key: string;
     quantity: number;
@@ -59,10 +66,12 @@ declare namespace CommonTypes {
     product: {
       node: {
         name?: string;
+        image: MediaItem;
         shortDescription: string;
         databaseId: number;
         sku: string;
         price: string;
+        stockQuantity: number | null;
       };
     };
   };

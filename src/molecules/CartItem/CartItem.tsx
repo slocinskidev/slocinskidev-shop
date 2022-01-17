@@ -8,41 +8,31 @@ import {
   ProductName,
   StyledSelect,
   ShortDescription,
-  StyledGatsbyImage,
+  StyledImage,
   Wrapper,
   Price,
 } from './CartItem.styles';
-import { useLazyQuery, useMutation } from '@apollo/client';
-import UPDATE_CART from 'mutations/update-cart';
 
-const CartItem = ({ product, removeProductFromCart, refetch }: CartItemProps) => {
+const CartItem = ({ product, loading, onUpdate }: CartItemProps) => {
   if (!product) return null;
+
+  const DEFAULT_MAX_PRODUCT_QUANTITY = 10;
 
   const {
     key,
     product: {
-      node: { name, shortDescription },
+      node: {
+        image: { srcSet, sizes, sourceUrl, altText },
+        name,
+        shortDescription,
+        stockQuantity,
+      },
     },
     quantity,
     total,
   } = product;
 
-  const [updateCart, { loading: updateCartProcessing }] = useMutation(UPDATE_CART, {
-    onCompleted: () => {
-      refetch();
-    },
-    onError: (error) => {
-      if (error) {
-        console.log(error);
-      }
-    },
-  });
-
   const [productCount, setProductCount] = useState<number>(quantity);
-
-  // const gatsbyImage = getImage(localFile);
-
-  // const renderImage = gatsbyImage ? <StyledGatsbyImage image={gatsbyImage} alt={altText} /> : null;
 
   const changeProductQuantity = (option: CommonTypes.SelectQuantityType | null, key: string) => {
     if (!option) return;
@@ -50,26 +40,35 @@ const CartItem = ({ product, removeProductFromCart, refetch }: CartItemProps) =>
     const newQty = option.value;
     setProductCount(newQty);
 
-    updateCart({
-      variables: {
-        input: {
-          items: [{ key, quantity: newQty }],
-        },
-      },
-    });
+    onUpdate({ key, quantity: newQty });
   };
 
-  const options = [
-    { value: 1, label: '1' },
-    { value: 2, label: '2' },
-    { value: 3, label: '3' },
-    { value: 4, label: '4' },
-    { value: 5, label: '5' },
-  ];
+  const removeProduct = () => {
+    onUpdate({ key, quantity: 0 });
+  };
+
+  const createStockOptions = (stockQuantity: number | null = 5) => {
+    const checkStockQuantity = (qty: number | null): number => {
+      if (!qty) return DEFAULT_MAX_PRODUCT_QUANTITY;
+
+      if (qty > DEFAULT_MAX_PRODUCT_QUANTITY) return DEFAULT_MAX_PRODUCT_QUANTITY;
+
+      return qty;
+    };
+
+    const val = Array.from({ length: checkStockQuantity(stockQuantity) }, (_, k) => ({
+      value: k + 1,
+      label: `${k + 1}`,
+    }));
+
+    return val;
+  };
+
+  const options = createStockOptions(stockQuantity);
 
   return (
-    <Wrapper>
-      {/* {renderImage} */}
+    <Wrapper loading={loading}>
+      <StyledImage srcSet={srcSet} sizes={sizes} src={sourceUrl} alt={altText} />
       <Content>
         <ProductName>{name}</ProductName>
         <ShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
@@ -83,7 +82,7 @@ const CartItem = ({ product, removeProductFromCart, refetch }: CartItemProps) =>
         />
         <Price dangerouslySetInnerHTML={{ __html: total }} />
       </Content>
-      <DeleteButton onClick={(e) => removeProductFromCart(e, key)} />
+      <DeleteButton onClick={removeProduct} />
     </Wrapper>
   );
 };
