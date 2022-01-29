@@ -18,7 +18,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const renderIcon = icon ? icon : null;
     const isIcon = icon ? true : false;
@@ -49,7 +49,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     return renderButton;
-  }
+  },
 );
 
 export default Button;

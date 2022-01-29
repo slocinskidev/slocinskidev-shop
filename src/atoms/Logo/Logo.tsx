@@ -42,44 +42,25 @@ const Logo = ({ variant, link, linkAlt, className }: LogoProps) => {
     const isPrimaryGatsbyImage =
       primaryImageExtension !== STRING.SVG_EXTENSION && primaryChildImageSharp;
     const isSecondaryGatsbyImage =
-      secondaryImageExtension !== STRING.SVG_EXTENSION &&
-      secondaryChildImageSharp;
+      secondaryImageExtension !== STRING.SVG_EXTENSION && secondaryChildImageSharp;
 
     const primaryImage = getImage(primaryLogo.localFile);
     const secondaryImage = getImage(secondaryLogo.localFile);
 
     const variantsMap = {
       [LOGO.VARIANT.PRIMARY]: isPrimaryGatsbyImage ? (
-        <GatsbyImage
-          image={primaryImage!}
-          alt={primaryLogo?.altText}
-          className={className}
-        />
+        <GatsbyImage image={primaryImage!} alt={primaryLogo?.altText} className={className} />
       ) : (
-        <img
-          src={primaryPublicURL}
-          alt={primaryLogo?.altText}
-          className={className}
-        />
+        <img src={primaryPublicURL} alt={primaryLogo?.altText} className={className} />
       ),
       [LOGO.VARIANT.SECONDARY]: isSecondaryGatsbyImage ? (
-        <GatsbyImage
-          image={secondaryImage!}
-          alt={secondaryLogo?.altText}
-          className={className}
-        />
+        <GatsbyImage image={secondaryImage!} alt={secondaryLogo?.altText} className={className} />
       ) : (
-        <img
-          src={secondaryPublicURL}
-          alt={secondaryLogo?.altText}
-          className={className}
-        />
+        <img src={secondaryPublicURL} alt={secondaryLogo?.altText} className={className} />
       ),
     };
 
-    return logoVariant
-      ? variantsMap[logoVariant]
-      : variantsMap[LOGO.VARIANT.PRIMARY];
+    return logoVariant ? variantsMap[logoVariant] : variantsMap[LOGO.VARIANT.PRIMARY];
   };
 
   const renderComponent = link ? (
