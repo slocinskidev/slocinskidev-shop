@@ -1,5 +1,9 @@
+import { CartQuery, UpdateCartMutationVariables } from 'apolloTypes';
+
 export interface CartItemProps {
-  product: CommonTypes.CartProductType;
-  loading: boolean;
-  onUpdate: (values: any) => void;
+  product: NonNullable<
+    NonNullable<NonNullable<NonNullable<CartQuery['cart']>['contents']>['nodes']>[0]
+  >;
+  loading?: boolean;
+  onUpdate?: (variables: UpdateCartMutationVariables) => void;
 }

@@ -1,19 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { CartContext } from 'providers/CartProvider';
-
-import { ContextType } from 'providers/model';
-
-import { Details, Heading, StyledButton, Summary, Wrapper } from './PriceDetails.styles';
 import { BUTTON } from 'atoms/Button';
-import { StyledRightArrow } from 'molecules/AddToCartButton/AddToCartButton.styles';
 
-const PriceDetails = ({ cart }: { cart: CommonTypes.CartType }) => {
+import { CartQuery } from 'apolloTypes';
+
+import { StyledRightArrow } from 'molecules/AddToCartButton/AddToCartButton.styles';
+import { Details, Heading, StyledButton, Summary, Wrapper } from './PriceDetails.styles';
+
+type PriceDetailsProps = {
+  cart: NonNullable<CartQuery['cart']>;
+};
+
+const PriceDetails = ({ cart }: PriceDetailsProps) => {
   return (
     <Wrapper>
       <Heading>Podsumowanie</Heading>
       <Details>
-        Ilość produktów: <span>{cart?.contents.itemCount}</span>
+        Ilość produktów: <span>{cart?.contents?.itemCount}</span>
       </Details>
       <Details>
         Wartość produktów: <span dangerouslySetInnerHTML={{ __html: cart?.subtotal! }} />

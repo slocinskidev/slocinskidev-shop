@@ -6,6 +6,8 @@ import ProductGallery from 'molecules/ProductGallery';
 import Accordion from 'molecules/Accordion';
 import { STRING } from 'utils/constants';
 
+import { ProductFragmentFragment, WpSimpleProduct, WpVariableProduct } from 'graphqlTypes';
+
 import {
   ProductName,
   CategoriesList,
@@ -18,53 +20,50 @@ import {
   DetailsWrapper,
   StyledAddToCartButton,
 } from './ProductDetailsPage.styles';
+import { PartialDeep } from 'type-fest';
 
 const ProductDetailsPage = ({
   data: { product },
 }: {
-  data: { product: CommonTypes.ProductType };
+  data: { product: PartialDeep<WpSimpleProduct | WpVariableProduct> };
 }) => {
   if (!product) return null;
 
-  const {
-    name,
-    shortDescription,
-    description,
-    image,
-    galleryImages,
-    price,
-    regularPrice,
-    onSale,
-    productCategories,
-  } = product;
+  const renderPrice =
+    product?.price && product?.onSale && product?.regularPrice ? (
+      <PriceSection>
+        {product.onSale ? (
+          <RegularPrice dangerouslySetInnerHTML={{ __html: product.regularPrice }} />
+        ) : null}
+        <Price dangerouslySetInnerHTML={{ __html: product.price }} />
+      </PriceSection>
+    ) : null;
 
-  const renderPrice = price ? (
-    <PriceSection>
-      {onSale ? <RegularPrice dangerouslySetInnerHTML={{ __html: regularPrice }} /> : null}
-      <Price dangerouslySetInnerHTML={{ __html: price }} />
-    </PriceSection>
-  ) : null;
-
-  const renderCategories = productCategories ? (
+  const renderCategories = product?.productCategories ? (
     <CategoriesList>
-      {productCategories.nodes?.map(({ id, name }) => (
-        <li key={id}>
+      {product?.productCategories?.nodes?.map((category) => (
+        <li key={category?.id}>
           <CategoryButton
             variant={BUTTON.VARIANT.CONTAINED}
-            link={`/${STRING.CATEGORY}/${name.toLocaleLowerCase()}`}
+            link={`/${STRING.CATEGORY}/${category?.name?.toLocaleLowerCase()}`}
           >
-            {name}
+            {category?.name}
           </CategoryButton>
         </li>
       ))}
     </CategoriesList>
   ) : null;
 
-  const renderButton = <StyledAddToCartButton product={product} />;
+  const renderButton = <StyledAddToCartButton productId={product?.databaseId!} />;
 
   return (
     <Wrapper>
-      <ProductGallery image={image} gallery={galleryImages.nodes} />
+      <ProductGallery
+        image={product?.image}
+        renderPrice={renderPrice}
+        renderCategories={renderCategories}
+        gallery={product?.galleryImages?.nodes}
+      />
       <DetailsWrapper>
         <ProductName>{name}</ProductName>
         {renderCategories}

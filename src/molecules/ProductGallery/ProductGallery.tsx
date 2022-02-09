@@ -8,13 +8,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { Slider, StyledGatsbyImage, Wrapper } from './ProductGallery.styles';
+import { WpSimpleProduct } from 'graphqlTypes';
 
 const ProductGallery = ({
   image,
   gallery,
 }: {
-  image: CommonTypes.ImageType;
-  gallery: CommonTypes.ImageType[];
+  image: NonNullable<WpSimpleProduct['image']>;
+  gallery: Array<WpSimpleProduct['image']>;
 }) => {
   const isGallery = gallery.length;
 

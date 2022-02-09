@@ -14,7 +14,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "tslint": "tsc --noEmit"
+    "tslint": "tsc --noEmit",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "^3.5.6",
@@ -30,7 +31,7 @@
     "gatsby-source-filesystem": "^4.3.0",
     "gatsby-source-wordpress": "^6.3.0",
     "gatsby-transformer-sharp": "^4.3.0",
-    "graphql": "^15.8.0",
+    "graphql": "^16.3.0",
     "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.21",
     "react": "^17.0.1",
@@ -41,10 +42,16 @@
     "styled-components": "^5.3.3",
     "swiper": "^7.3.3",
     "ts-node": "^10.4.0",
+    "type-fest": "^2.11.2",
+    "typescript": "^4.5.5",
     "uuid": "^8.3.2",
     "zod": "^3.11.6"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.4.0",
+    "@graphql-codegen/typescript": "2.4.2",
+    "@graphql-codegen/typescript-operations": "2.2.3",
+    "@graphql-codegen/typescript-react-apollo": "3.2.4",
     "@types/isomorphic-fetch": "^0.0.35",
     "@types/node": "^17.0.2",
     "@types/react": "^17.0.37",

@@ -1,20 +1,18 @@
 import React from 'react';
-import { isApolloError, useMutation } from '@apollo/client';
+import { isApolloError } from '@apollo/client';
 
 import Button, { BUTTON } from 'atoms/Button';
 
-import ADD_TO_CART from 'mutations/add-to-cart';
-
 import { StyledRightArrow } from './AddToCartButton.styles';
+import { useAddToCartMutation } from 'apolloTypes';
 
-const AddToCartButton = ({
-  product,
-  className,
-}: {
-  product: CommonTypes.ProductType;
+type AddToCartProps = {
+  productId: number;
   className?: string;
-}) => {
-  const [addToCart, { loading }] = useMutation(ADD_TO_CART, {
+};
+
+const AddToCartButton = ({ productId, className }: AddToCartProps) => {
+  const [addToCart, { loading }] = useAddToCartMutation({
     refetchQueries: ['Cart'],
     awaitRefetchQueries: true,
   });
@@ -23,7 +21,7 @@ const AddToCartButton = ({
     try {
       await addToCart({
         variables: {
-          productId: product.productId,
+          productId,
         },
       });
     } catch (error) {

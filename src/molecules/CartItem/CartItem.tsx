@@ -18,21 +18,7 @@ const CartItem = ({ product, loading, onUpdate }: CartItemProps) => {
 
   const DEFAULT_MAX_PRODUCT_QUANTITY = 10;
 
-  const {
-    key,
-    product: {
-      node: {
-        image: { srcSet, sizes, sourceUrl, altText },
-        name,
-        shortDescription,
-        stockQuantity,
-      },
-    },
-    quantity,
-    total,
-  } = product;
-
-  const [productCount, setProductCount] = useState<number>(quantity);
+  const [productCount, setProductCount] = useState<number | null | undefined>(product?.quantity);
 
   const changeProductQuantity = (option: CommonTypes.SelectQuantityType | null, key: string) => {
     if (!option) return;
@@ -40,11 +26,11 @@ const CartItem = ({ product, loading, onUpdate }: CartItemProps) => {
     const newQty = option.value;
     setProductCount(newQty);
 
-    onUpdate({ key, quantity: newQty });
+    if (onUpdate != null) onUpdate({ key, quantity: newQty });
   };
 
-  const removeProduct = () => {
-    onUpdate({ key, quantity: 0 });
+  const removeProduct = (key: string) => {
+    if (onUpdate != null) onUpdate({ key, quantity: 0 });
   };
 
   const createStockOptions = (stockQuantity: number | null = 5) => {
@@ -64,25 +50,36 @@ const CartItem = ({ product, loading, onUpdate }: CartItemProps) => {
     return val;
   };
 
-  const options = createStockOptions(stockQuantity);
+  const options = createStockOptions(
+    (product?.product?.node?.__typename === 'SimpleProduct' &&
+      product.product.node.stockQuantity) ||
+      undefined,
+  );
 
   return (
-    <Wrapper loading={loading}>
-      <StyledImage srcSet={srcSet} sizes={sizes} src={sourceUrl} alt={altText} />
+    <Wrapper loading={!!loading}>
+      <StyledImage
+        srcSet={product?.product?.node?.image?.srcSet!}
+        sizes={product?.product?.node?.image?.sizes!}
+        src={product?.product?.node?.image?.sourceUrl!}
+        alt={product?.product?.node?.image?.altText!}
+      />
       <Content>
-        <ProductName>{name}</ProductName>
-        <ShortDescription dangerouslySetInnerHTML={{ __html: shortDescription }} />
+        <ProductName>{product?.product?.node?.name}</ProductName>
+        <ShortDescription
+          dangerouslySetInnerHTML={{ __html: product?.product?.node?.shortDescription ?? '' }}
+        />
         <StyledSelect
           classNamePrefix="Select"
           options={options}
-          value={options[productCount - 1]}
+          value={productCount && options[productCount - 1]}
           onChange={(option) =>
-            changeProductQuantity(option as CommonTypes.SelectQuantityType, key)
+            changeProductQuantity(option as CommonTypes.SelectQuantityType, product.key)
           }
         />
-        <Price dangerouslySetInnerHTML={{ __html: total }} />
+        <Price dangerouslySetInnerHTML={{ __html: product?.total ?? '' }} />
       </Content>
-      <DeleteButton onClick={removeProduct} />
+      <DeleteButton onClick={() => removeProduct(product.key)} />
     </Wrapper>
   );
 };
