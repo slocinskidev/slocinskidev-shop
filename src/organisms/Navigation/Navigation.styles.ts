@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 import breakpoint from 'utils/breakpoints';
+import { NavigationProps } from './model';
 
-export const Wrapper = styled.nav<{ isActive: boolean }>`
+export const Wrapper = styled.nav<Pick<NavigationProps, 'isActive'>>`
   position: absolute;
   top: 0;
   left: 0;

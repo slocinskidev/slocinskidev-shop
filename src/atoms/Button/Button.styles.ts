@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
 import { BUTTON } from 'atoms/Button';
+import { ButtonProps } from './model';
 
 export const Content = styled.span`
   display: flex;
   align-items: center;
 `;
 
-export const Wrapper = styled.button<{
-  variant: BUTTON.VARIANT;
-}>`
+export const Wrapper = styled.button<Pick<ButtonProps, 'variant'>>`
   position: relative;
   display: inline-flex;
   color: ${({ theme }) => theme.color.tertiary};

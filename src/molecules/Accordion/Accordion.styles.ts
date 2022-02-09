@@ -1,5 +1,6 @@
 import ArrowDown from 'atoms/SVG/ArrowDown';
 import styled, { css } from 'styled-components';
+import { AccordionCollapsedType } from './model';
 
 export const Content = styled.div`
   display: grid;
@@ -13,7 +14,7 @@ export const StyledArrowDown = styled(ArrowDown)`
   transition: ${({ theme }) => theme.transition('transform')};
 `;
 
-export const Wrapper = styled.section<{ isCollapsed: boolean }>`
+export const Wrapper = styled.section<{ isCollapsed: AccordionCollapsedType }>`
   position: relative;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray6};
 

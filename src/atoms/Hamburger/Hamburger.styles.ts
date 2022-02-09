@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import breakpoint from 'utils/breakpoints';
+import { HamburgerProps } from './model';
 
 export const Bar = styled.span`
   display: block;
@@ -30,7 +31,7 @@ export const Bar = styled.span`
   }
 `;
 
-export const Wrapper = styled.button<{ isActive: boolean }>`
+export const Wrapper = styled.button<Pick<HamburgerProps, 'isActive'>>`
   width: 50px;
   height: 50px;
   position: relative;

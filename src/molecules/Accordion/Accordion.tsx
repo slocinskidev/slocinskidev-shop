@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 import Button, { BUTTON } from 'atoms/Button';
 
-import { AccordionProps } from './model';
+import { AccordionCollapsedType, AccordionProps } from './model';
 
 import { Wrapper, Content, StyledArrowDown } from './Accordion.styles';
 
 const Accordion = ({ title, content, className, isAccordionOpen = false }: AccordionProps) => {
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(isAccordionOpen);
+  const [isCollapsed, setIsCollapsed] = useState<AccordionCollapsedType>(isAccordionOpen);
 
   const renderContent = content ? <Content dangerouslySetInnerHTML={{ __html: content }} /> : null;
 

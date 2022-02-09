@@ -1,8 +1,9 @@
 import Button from 'atoms/Button';
 import Select from 'react-select';
 import styled, { css } from 'styled-components';
+import { CartItemProps } from './model';
 
-export const Wrapper = styled.li<{ loading: boolean }>`
+export const Wrapper = styled.li<Pick<CartItemProps, 'loading'>>`
   display: grid;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray6};
   padding-bottom: 2rem;

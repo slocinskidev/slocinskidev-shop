@@ -4,3 +4,5 @@ export interface AccordionProps {
   className?: string;
   isAccordionOpen?: boolean;
 }
+
+export type AccordionCollapsedType = boolean;
